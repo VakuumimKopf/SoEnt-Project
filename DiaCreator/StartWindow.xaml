@@ -1,0 +1,47 @@
+﻿<Window x:Class="DiaCreator.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiaCreator"
+        mc:Ignorable="d"
+        Title="StartWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Name="NeuesDiagrammHL" Grid.Row="0"
+                       Text="Neues Diagramm" HorizontalAlignment="Center" VerticalAlignment="Center">
+            </TextBlock>
+            <ListView Grid.Row="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <Button Content="Hello"/>
+                        </GridViewColumn>
+                            <GridViewColumn Header="Last Name"/>
+                        <GridViewColumn Header="Favorite City"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Name="AlteDiagrammeHL" Grid.Row="0"
+                       Text="Alte Diagramme" HorizontalAlignment="Center" VerticalAlignment="Center">
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>
+
+    

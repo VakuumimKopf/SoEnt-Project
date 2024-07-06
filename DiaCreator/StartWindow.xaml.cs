@@ -14,9 +14,9 @@ namespace DiaCreator
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StartWindow : Window
     {
-        public MainWindow()
+        public StartWindow()
         {
             InitializeComponent();
         }
