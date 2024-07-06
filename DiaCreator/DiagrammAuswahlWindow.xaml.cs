@@ -21,6 +21,7 @@ namespace DiaCreator
     {
         public DiagrammAuswahlWindow()
         {
+            Console.WriteLine("Test");
             InitializeComponent();
         }
     }

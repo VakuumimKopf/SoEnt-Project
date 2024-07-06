@@ -9,6 +9,7 @@ namespace DiaCreator
     /// </summary>
     public partial class App : Application
     {
+       
     }
 
 }

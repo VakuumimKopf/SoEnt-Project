@@ -14,23 +14,21 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <TextBlock Name="NeuesDiagrammHL" Grid.Row="0"
-                       Text="Neues Diagramm" HorizontalAlignment="Center" VerticalAlignment="Center">
-            </TextBlock>
-            <ListView Grid.Row="1">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn>
-                            <Button Content="Hello"/>
-                        </GridViewColumn>
-                            <GridViewColumn Header="Last Name"/>
-                        <GridViewColumn Header="Favorite City"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                       Text="Neues Diagramm" HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+            <Grid Grid.Row="1" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Margin="10,0,0,0" Text="Test"/>
+                <Button Grid.Column="1" Content="Add File" Padding="10,0" HorizontalAlignment="Stretch"
+                        Margin="10,0,0,0" Click="ClickAddFile"/>
+            </Grid>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
