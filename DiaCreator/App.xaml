@@ -10,7 +10,16 @@
                 <ResourceDictionary Source="/DiaCreator;component/Dictionary1.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type local:DSet}">
-                <TextBlock Text="{Binding Path=Text}"/>
+                <Border BorderBrush="Black" Margin="5" BorderThickness="1" Width="350">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Margin="10"/>
+                        <TextBlock Text="{Binding Path=Id}" Grid.Column="1" Margin="10"/>
+                    </Grid>
+                </Border>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

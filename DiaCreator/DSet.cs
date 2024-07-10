@@ -1,29 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DiaCreator
-{
-    public class DSet
-    {
-        private string text;
-        public string Text 
-        {
-            get { return text; } 
-            set
-            {
-                text = value;
-            } 
-        }
-
-        public DSet(string text_n)
-        {
-            text = text_n;
-=======
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -32,7 +8,7 @@ using System.Windows.Navigation;
 
 namespace DiaCreator
 {
-    class DSet
+    public class DSet
     {
         private string name;
         public string Name
@@ -62,7 +38,6 @@ namespace DiaCreator
         public void AddData(string value1, string value2)
         {
             data.Add([value1, value2]);
->>>>>>> 3fdccfde70e7cd27115e2aefcacde237430240ac
         }
 
     }

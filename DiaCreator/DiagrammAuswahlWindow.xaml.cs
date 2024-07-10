@@ -15,23 +15,20 @@ using System.Windows.Shapes;
 
 namespace DiaCreator
 {
-    /// <summary>
-    /// Interaktionslogik für DiagrammAuswahlWindow.xaml
-    /// </summary>
+ 
     public partial class DiagrammAuswahlWindow : Window
     {
-        public ObservableCollection<DSet> DSetItems { get; private set; } = new ObservableCollection<DSet>();
-
-
-        //private readonly CollectionViewSource listingDataView;
+        public ObservableCollection<DSet> DSetItems { get;  set; } = new ObservableCollection<DSet>();         
         public DiagrammAuswahlWindow()
         {
             InitializeComponent();
-            //listingDataView = (CollectionViewSource)(Resources["Items"]);
         }
         private void TestButton(object sender, RoutedEventArgs e) 
         {
-            DSetItems.Add(new DSet("Hurensohn"));
+            DSetItems.Add(new DSet("DSet1", 4));
+            DSetItems.Add(new DSet("DSet2", 67));
+            DSetItems.Add(new DSet("DSet3", 9));
+
         }
 
     }
