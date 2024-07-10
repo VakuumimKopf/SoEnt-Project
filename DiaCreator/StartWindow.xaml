@@ -5,41 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DiaCreator"
         mc:Ignorable="d"
-        Title="StartWindow" Height="450" Width="800">
+        Title="StartWindow" Height="450" Width="350">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="100"/>
-            </Grid.RowDefinitions>
-            <TextBlock Name="NeuesDiagrammHL" Grid.Row="0"
-                       Text="Neues Diagramm" HorizontalAlignment="Center" 
-                       VerticalAlignment="Center"/>
-            <Grid Grid.Row="1" Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10,20,10,20" Grid.Row="0">
+            <TextBlock Text="Neues Diagramm" HorizontalAlignment="Center" Margin="0,10"/>
+            <Grid Margin="0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Margin="10,0,0,0" Text="Test"/>
+                <TextBox Grid.Column="0" Text="Dateipfad"/>
                 <Button Grid.Column="1" Content="Add File" Padding="10,0" HorizontalAlignment="Stretch"
-                        Margin="10,0,0,0" Click="ClickAddFile"/>
+            Margin="10,0,0,0" Click="ClickAddFile"/>
             </Grid>
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Name="AlteDiagrammeHL" Grid.Row="0"
-                       Text="Alte Diagramme" HorizontalAlignment="Center" VerticalAlignment="Center">
-            </TextBlock>
-        </Grid>
+            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True">
+                <ComboBoxItem Content="Kreisdiagramm"/>
+                <ComboBoxItem Content="Säulendiagramm"/>
+                <ComboBoxItem Content="Liniendiagramm"/>
+            </ComboBox>
+        </StackPanel>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" 
+                Content="Erstellen" Grid.Row="1" Click="ClickErstelleNeuesProjekt"/>
     </Grid>
+
 </Window>
 
-    

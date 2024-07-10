@@ -2,12 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:DiaCreator"
+             Startup="AppStartup"
              StartupUri="StartWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/DiaCreator;component/Dictionary1.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type local:DSet}">
+                <TextBlock Text="{Binding Path=Text}"/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

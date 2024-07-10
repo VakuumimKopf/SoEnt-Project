@@ -26,8 +26,8 @@ namespace DiaCreator
             // Configure open file dialog box
             var dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.FileName = "Document"; // Default file name
-            dialog.DefaultExt = ".txt"; // Default file extension
-            dialog.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+            dialog.DefaultExt = ".csv"; // Default file extension
+            dialog.Filter = "Data documents (.csv)|*.csv"; // Filter files by extension
 
             // Show open file dialog box
             bool? result = dialog.ShowDialog();
@@ -38,6 +38,12 @@ namespace DiaCreator
                 // Open document
                 string filename = dialog.FileName;
             }
+        }
+        private void ClickErstelleNeuesProjekt(object sender, RoutedEventArgs e) 
+        { 
+            var DiagrammAuswahlWindow = new DiagrammAuswahlWindow();
+            Close();
+            DiagrammAuswahlWindow.Show();
         }
     }
 }

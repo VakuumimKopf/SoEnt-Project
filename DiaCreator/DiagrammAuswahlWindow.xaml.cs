@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,19 @@ namespace DiaCreator
     /// </summary>
     public partial class DiagrammAuswahlWindow : Window
     {
+        public ObservableCollection<DSet> DSetItems { get; private set; } = new ObservableCollection<DSet>();
+
+
+        //private readonly CollectionViewSource listingDataView;
         public DiagrammAuswahlWindow()
         {
-            Console.WriteLine("Test");
             InitializeComponent();
+            //listingDataView = (CollectionViewSource)(Resources["Items"]);
         }
+        private void TestButton(object sender, RoutedEventArgs e) 
+        {
+            DSetItems.Add(new DSet("Hurensohn"));
+        }
+
     }
 }

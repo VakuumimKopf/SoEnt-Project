@@ -6,7 +6,31 @@
         xmlns:local="clr-namespace:DiaCreator"
         mc:Ignorable="d"
         Title="DiagrammAuswahlWindow" Height="450" Width="800">
+    <Window.Resources>
+        <CollectionViewSource Source="{Binding Path=DSetItems, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" x:Key="DSetView"/>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="10" Text="Diagramm anpassen" />
+        <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" BorderBrush="Blue">
+            <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="10"
+                     ItemsSource="{Binding Source={StaticResource DSetView}}">
+            </ListBox>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" Margin="10">
+            <ListBox>
+            </ListBox>
+        </Border>
+        <Button Grid.Column="1" Grid.Row="2" Content="Text" Margin="10" Click="TestButton"/>
     </Grid>
 </Window>
