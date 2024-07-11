@@ -41,9 +41,9 @@ namespace DiaCreator
         }
         private void ClickErstelleNeuesProjekt(object sender, RoutedEventArgs e) 
         { 
-            var DiagrammAuswahlWindow = new DiagrammAuswahlWindow();
+            var DatenWindow = new DatenWindow();
             Close();
-            DiagrammAuswahlWindow.Show();
+            DatenWindow.Show();
         }
     }
 }

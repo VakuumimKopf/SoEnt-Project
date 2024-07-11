@@ -16,10 +16,13 @@ using System.Windows.Shapes;
 namespace DiaCreator
 {
  
-    public partial class DiagrammAuswahlWindow : Window
+    public partial class DatenWindow : Window
     {
-        public ObservableCollection<DSet> DSetItems { get;  set; } = new ObservableCollection<DSet>();         
-        public DiagrammAuswahlWindow()
+        public ObservableCollection<DSet> DSetItems { get;  set; } = new ObservableCollection<DSet>();
+
+        public Config config { get; set; } = new Config("Saulendia");
+        
+        public DatenWindow()
         {
             InitializeComponent();
         }
@@ -28,7 +31,6 @@ namespace DiaCreator
             DSetItems.Add(new DSet("DSet1", 4));
             DSetItems.Add(new DSet("DSet2", 67));
             DSetItems.Add(new DSet("DSet3", 9));
-
         }
 
     }

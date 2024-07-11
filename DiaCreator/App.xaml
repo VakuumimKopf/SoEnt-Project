@@ -21,6 +21,21 @@
                     </Grid>
                 </Border>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type local:KreisdiaConfigView}">
+                <Border>
+                    <Label Content="KreisdiaConfig"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:SaulendiaConfigView}">
+                <Border>
+                    <Label Content="SäulendiaConfig"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:LiniendiaConfigView}">
+                <Border>
+                    <Label Content="LiniendiaConfig"/>
+                </Border>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
