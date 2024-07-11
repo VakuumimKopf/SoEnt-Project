@@ -25,12 +25,27 @@ namespace DiaCreator
         public DatenWindow()
         {
             InitializeComponent();
+            FillDSetItems();
         }
-        private void TestButton(object sender, RoutedEventArgs e) 
+        
+        private void FillDSetItems()
         {
             DSetItems.Add(new DSet("DSet1", 4));
             DSetItems.Add(new DSet("DSet2", 67));
             DSetItems.Add(new DSet("DSet3", 9));
+        }
+        private void DarstellenClick(object sender, RoutedEventArgs e) 
+        {
+            Thread DiagrammThread = new Thread(ThreadStartingPoint);
+            DiagrammThread.SetApartmentState(ApartmentState.STA);
+            DiagrammThread.IsBackground = true;
+            DiagrammThread.Start();
+        }
+
+        private void ThreadStartingPoint() 
+        {
+            new DiagrammWindow().Show();
+            System.Windows.Threading.Dispatcher.Run();
         }
 
     }
