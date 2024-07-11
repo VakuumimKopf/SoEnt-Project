@@ -8,7 +8,7 @@ using System.Windows.Navigation;
 
 namespace DiaCreator
 {
-    class DSet
+    public class DSet
     {
         private string name;
         public string Name

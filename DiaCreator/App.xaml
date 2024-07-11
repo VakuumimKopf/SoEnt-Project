@@ -2,8 +2,40 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:DiaCreator"
-             StartupUri="MainWindow.xaml">
+             Startup="AppStartup"
+             StartupUri="StartWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DiaCreator;component/Dictionary1.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type local:DSet}">
+                <Border BorderBrush="Black" Margin="5" BorderThickness="1" Width="350">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Margin="10"/>
+                        <TextBlock Text="{Binding Path=Id}" Grid.Column="1" Margin="10"/>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:KreisdiaConfigView}">
+                <Border>
+                    <Label Content="KreisdiaConfig"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:SaulendiaConfigView}">
+                <Border>
+                    <Label Content="SäulendiaConfig"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:LiniendiaConfigView}">
+                <Border>
+                    <Label Content="LiniendiaConfig"/>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

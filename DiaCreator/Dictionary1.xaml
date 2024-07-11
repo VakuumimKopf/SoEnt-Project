@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lokal="clr-namespace:DiaCreator">
+    <Style x:Key="ActionButton" TargetType="Button">
+        <Setter Property="Padding" Value="10,5,5,10"/>
+        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="Background" Value="Coral"/>
+        <Setter Property="Content" Value="AC"/>
+    </Style>
+</ResourceDictionary>
