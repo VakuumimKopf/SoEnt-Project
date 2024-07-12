@@ -9,22 +9,36 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/DiaCreator;component/Dictionary1.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate DataType="{x:Type local:DSet}">
+            <DataTemplate DataType="{x:Type local:DSetViewModell}">
                 <Border BorderBrush="Black" Margin="5" BorderThickness="1" Width="350">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Margin="10"/>
                         <TextBlock Text="{Binding Path=Id}" Grid.Column="1" Margin="10"/>
+                        <Button Content="Hallo" Command="" Grid.Column="2"/>
                     </Grid>
                 </Border>
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:KreisdiaConfigView}">
-                <Border>
-                    <Label Content="KreisdiaConfig"/>
-                </Border>
+                <StackPanel>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Dateneinstellungen" Grid.Column="0"/>
+                            <Button Content="Hallo" Grid.Column="1" />
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Label Content="Aussehenseinstellungen"/>
+                    </Border>
+                </StackPanel>
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:SaulendiaConfigView}">
                 <Border>
