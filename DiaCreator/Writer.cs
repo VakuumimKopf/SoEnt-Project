@@ -6,7 +6,23 @@ using System.Threading.Tasks;
 
 namespace DiaCreator
 {
-    internal class Writer
+    public interface Writer
     {
+
+    }
+
+    public class KreisdiaWriter : Writer
+    {
+
+    }
+
+    public class SaulendiaWriter : Writer 
+    {
+
+    }
+
+    public class LiniendiaWriter : Writer
+    {
+
     }
 }

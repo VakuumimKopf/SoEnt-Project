@@ -29,19 +29,26 @@ namespace DiaCreator
     
     public class Config
     {
+        private ConfigView? view;
         public ConfigView? View { get; set; }
-        public Config(string type) 
+        public Config(string type, Builder builder) 
         {
-            switch (type)
+            View = builder.CreateConfigView(type);
+        }
+
+        public static implicit operator ConfigViewModell(Config config)
+        {
+            return new ConfigViewModell
             {
-                case "Kreisdia": View = new KreisdiaConfigView(); break;
-                case "Saulendia": View = new SaulendiaConfigView(); break;
-                case "Liniendia": View = new LiniendiaConfigView(); break;
-                default: break;
-            }
+                View = config.View,
+            };
         }
 
 
-
+    }
+    public class ConfigViewModell : BaseViewModell
+    {
+        private ConfigView? view;
+        public ConfigView? View { get; set; }
     }
 }

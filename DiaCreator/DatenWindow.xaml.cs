@@ -18,22 +18,16 @@ namespace DiaCreator
  
     public partial class DatenWindow : Window
     {
-        public ObservableCollection<DSet> DSetItems { get;  set; } = new ObservableCollection<DSet>();
-
-        public Config config { get; set; } = new Config("Saulendia");
-        
         public DatenWindow()
         {
             InitializeComponent();
-            FillDSetItems();
+            var database = new DHolder();
+            database.AddData(new DSet("Ob1", 1));
+            database.AddData(new DSet("Ob2", 2));
+            var config = new Config("Kreisdia", new Builder());
+            this.DataContext = new DataWinViewModell(database, config);
         }
         
-        private void FillDSetItems()
-        {
-            DSetItems.Add(new DSet("DSet1", 4));
-            DSetItems.Add(new DSet("DSet2", 67));
-            DSetItems.Add(new DSet("DSet3", 9));
-        }
         private void DarstellenClick(object sender, RoutedEventArgs e) 
         {
             Thread DiagrammThread = new Thread(ThreadStartingPoint);
