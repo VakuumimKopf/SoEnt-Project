@@ -4,27 +4,66 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DiaCreator
 {
     public interface ConfigView 
     {
-
+        public void FillUi();
     }
 
-    public class KreisdiaConfigView : ConfigView 
+    public class KreisdiaConfigView : ConfigView
     {
-        public KreisdiaConfigView() { }
+        public List<string> NameCollection { get; set; } = new List<string>();
+        public KreisdiaConfigView() 
+        {
+            FillUi();   
+        }
+        public void FillUi() 
+        {
+            string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
+            foreach (string item in TableHeadString)
+            {
+                NameCollection.Add(item);
+            }
+        }
     }
 
     public class SaulendiaConfigView : ConfigView
     {
-        public SaulendiaConfigView() { }
+        public List<string> SauCollection { get; set; }
+        public SaulendiaConfigView() 
+        {
+
+            SauCollection = new List<string>()
+            {
+                "TestSau1",
+                "TestSau",
+                "{0}"
+            };
+        }
+        public void FillUi()
+        {
+            string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
+            foreach (string item in TableHeadString)
+            {
+                //NameCollection.Add(item);
+            }
+        }
     }
 
     public class LiniendiaConfigView : ConfigView 
     {
         public LiniendiaConfigView() { }
+        public void FillUi()
+        {
+            string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
+            foreach (string item in TableHeadString)
+            {
+                //NameCollection.Add(item);
+            }
+        }
     }
     
     public class Config
