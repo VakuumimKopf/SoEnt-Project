@@ -22,7 +22,7 @@
                 <Button Grid.Column="1" Content="Add File" Padding="10,0" HorizontalAlignment="Stretch"
             Margin="10,0,0,0" Click="ClickAddFile"/>
             </Grid>
-            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True">
+            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" SelectionChanged="DiaSelectionChanged" Name ="Test" SelectedValuePath="Content">
                 <ComboBoxItem Content="Kreisdiagramm"/>
                 <ComboBoxItem Content="Säulendiagramm"/>
                 <ComboBoxItem Content="Liniendiagramm"/>
