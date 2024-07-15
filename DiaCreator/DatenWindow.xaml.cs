@@ -21,11 +21,8 @@ namespace DiaCreator
         public DatenWindow()
         {
             InitializeComponent();
-            var database = new DHolder();
-            database.AddData(new DSet("Ob1", 1));
-            database.AddData(new DSet("Ob2", 2));
             var config = new Config("Kreisdia", new Builder());
-            this.DataContext = new DataWinViewModell(database, config);
+            this.DataContext = new DataWinViewModell(config);
         }
         
         private void DarstellenClick(object sender, RoutedEventArgs e) 
@@ -38,7 +35,7 @@ namespace DiaCreator
 
         private void ThreadStartingPoint() 
         {
-            new DiagrammWindow().Show();
+            DiagrammWindow.getInstance().Show();
             System.Windows.Threading.Dispatcher.Run();
         }
 

@@ -19,9 +19,20 @@ namespace DiaCreator
     /// </summary>
     public partial class DiagrammWindow : Window
     {
-        public DiagrammWindow()
+        private static DiagrammWindow diagrammwininstance;   
+        public static DiagrammWindow getInstance() 
+        {
+            if (diagrammwininstance == null) 
+            {
+                diagrammwininstance = new DiagrammWindow();
+            }
+            return diagrammwininstance;
+        }
+        
+        private DiagrammWindow()
         {
             InitializeComponent();
         }
+
     }
 }

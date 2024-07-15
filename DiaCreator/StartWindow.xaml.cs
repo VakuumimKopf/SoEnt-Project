@@ -17,6 +17,8 @@ namespace DiaCreator
     /// </summary>
     public partial class StartWindow : Window
     {
+        
+        
         public StartWindow()
         {
             InitializeComponent();

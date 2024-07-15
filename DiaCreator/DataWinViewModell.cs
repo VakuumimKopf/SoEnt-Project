@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DiaCreator
 {
@@ -37,9 +38,9 @@ namespace DiaCreator
             }
         }
 
-        public DataWinViewModell(DHolder dHolder, Config config) 
+        public DataWinViewModell(Config config) 
         {
-            var DSets = dHolder.GetAllData();
+            var DSets = App.CurrentDHolder.GetAllData();
             var DSetViewModells = DSets.Select(m => new DSetViewModell(m.Name, m.Id, m.Data));
             DSetItems = new ObservableCollection<DSetViewModell>(DSetViewModells);
             Config = config;
