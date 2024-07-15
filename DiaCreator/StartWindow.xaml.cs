@@ -17,8 +17,8 @@ namespace DiaCreator
     /// </summary>
     public partial class StartWindow : Window
     {
-        
-        
+        private string Dia = "Kreisdiagramm";
+        public string filepath;
         public StartWindow()
         {
             InitializeComponent();
@@ -38,14 +38,22 @@ namespace DiaCreator
             if (result == true)
             {
                 // Open document
-                string filename = dialog.FileName;
+                filepath = dialog.FileName;
             }
         }
         private void ClickErstelleNeuesProjekt(object sender, RoutedEventArgs e) 
-        { 
-            var DatenWindow = new DatenWindow();
+        {
+            App.CurrentReader = App.CurrentBuilder.CreateReader("csv", filepath);
+            App.CurrentDHolder.AddDataList(App.CurrentReader.GetFileData());
+
+            var DatenWindow = new DatenWindow(Dia, filepath);
             Close();
             DatenWindow.Show();
+        }
+
+        private void DiaSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+           //Dia = ((ComboBoxItem)Test.SelectedItem).Content.ToString();   
         }
     }
 }

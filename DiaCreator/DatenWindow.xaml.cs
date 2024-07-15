@@ -18,10 +18,10 @@ namespace DiaCreator
  
     public partial class DatenWindow : Window
     {
-        public DatenWindow()
+        public DatenWindow(string DiagrammArt, string path)
         {
             InitializeComponent();
-            var config = new Config("Kreisdia", new Builder());
+            var config = new Config(DiagrammArt, new Builder());
             this.DataContext = new DataWinViewModell(config);
         }
         

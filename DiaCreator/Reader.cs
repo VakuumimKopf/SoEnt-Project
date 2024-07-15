@@ -9,7 +9,7 @@ using System.Windows.Shapes;
 
 namespace DiaCreator
 {
-    interface Reader
+    public interface Reader
     {
         public string GetTableHead();
         public List<DSet> GetFileData();
@@ -20,7 +20,7 @@ namespace DiaCreator
         private readonly string Path;
         public int Kategorie { get; set; }
 
-        public CSVReader(string path, int kategorie = 0)
+        public CSVReader(string path, int kategorie)
         {
             this.Path = path;
             this.Kategorie = kategorie;
@@ -40,7 +40,7 @@ namespace DiaCreator
         {                                                                  // und werte werden hinzugefügt
             if (DSetExist(Temp, Data[kategorie]) == false)
             {
-                Temp.Add(new DSet(Data[kategorie], kategorie));
+                Temp.Add(new DSet(Data[kategorie]));
                 DSetAddValues(Temp, Data, kategorie);
             }
             else
@@ -87,7 +87,6 @@ namespace DiaCreator
         }
         public string GetTableHead()
         {
-            string TableHead;
             string[] lines = File.ReadAllLines(Path);
 
             int i = 0;       // variable to get the tablehead
@@ -96,7 +95,7 @@ namespace DiaCreator
             {
                 if (i == 0)
                 {
-                    TableHead = line;             //tableHead
+                    string TableHead = line;             //tableHead
                     i++;
                     return TableHead;
 
