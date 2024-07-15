@@ -18,14 +18,11 @@ namespace DiaCreator
  
     public partial class DatenWindow : Window
     {
-        public DatenWindow()
+        public DatenWindow(string DiagrammArt, string path)
         {
             InitializeComponent();
-            var database = new DHolder();
-            database.AddData(new DSet("Ob1", 1));
-            database.AddData(new DSet("Ob2", 2));
-            var config = new Config("Kreisdia", new Builder());
-            this.DataContext = new DataWinViewModell(database, config);
+            var config = new Config(DiagrammArt, new Builder());
+            this.DataContext = new DataWinViewModell(App.CurrentDHolder, config);
         }
         
         private void DarstellenClick(object sender, RoutedEventArgs e) 

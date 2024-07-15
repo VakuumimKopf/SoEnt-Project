@@ -17,9 +17,9 @@ namespace DiaCreator
         {
             switch (type)
             {
-                case "Kreisdia": return new KreisdiaWriter();
-                case "Saulendia": return new SaulendiaWriter();
-                case "Liniendia": return new LiniendiaWriter();
+                case "Kreisdiagramm": return new KreisdiaWriter();
+                case "Säulendiagramm": return new SaulendiaWriter();
+                case "Liniendiagramm": return new LiniendiaWriter();
                 default: throw new Exception("Übergebener Writer Type existiert nicht");
             }
         }
@@ -28,21 +28,21 @@ namespace DiaCreator
         {
             switch (type)
             {
-                case "Kreisdia": return new KreisdiaConfigView();
-                case "Saulendia": return new SaulendiaConfigView();
-                case "Liniendia": return new LiniendiaConfigView();
+                case "Kreisdiagramm": return new KreisdiaConfigView();
+                case "Säulendiagramm": return new SaulendiaConfigView();
+                case "Liniendiagramm": return new LiniendiaConfigView();
                 default: throw new Exception("Übergebener Config Type existiert nicht");
             }
         }
 
-        /*public Reader CreateReader(string type) 
+        public Reader CreateReader(string type, string path) 
         {
             switch (type)
             {
-                case ""csv": return new CSVReader();
+                case "csv": return new CSVReader(path);
                 default: throw new Exception("Übergebener Reader Type existiert nicht");
             }
         }  
-         */ 
+         
     }
 }

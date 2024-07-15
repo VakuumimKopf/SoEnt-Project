@@ -19,37 +19,102 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Margin="10"/>
                         <TextBlock Text="{Binding Path=Id}" Grid.Column="1" Margin="10"/>
-                        <Button Content="Hallo" Command="" Grid.Column="2"/>
+                        <Button Content="Hi" Command="" Grid.Column="2"/>
                     </Grid>
                 </Border>
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:KreisdiaConfigView}">
                 <StackPanel>
                     <Border>
+                        <Label Content="Aussehenseinstellungen"/>
+                    </Border>
+					<Border>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+                            <Label Content="Value" Grid.Column="0"/>
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" ItemsSource ="{Binding NameCollection}">
+                            </ComboBox>
+                        </Grid>
+				    </Border>
+                    <Border>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Dateneinstellungen" Grid.Column="0"/>
-                            <Button Content="Hallo" Grid.Column="1" />
+                            <Label Content="Anzeigeart" Grid.Column="0"/>
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="2">
+                                <ComboBoxItem Content="Absolute Werte"/>
+                                <ComboBoxItem Content="Relative Werte"/>
+                            </ComboBox>
                         </Grid>
-                    </Border>
-                    <Border>
-                        <Label Content="Aussehenseinstellungen"/>
                     </Border>
                 </StackPanel>
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:SaulendiaConfigView}">
-                <Border>
-                    <Label Content="SäulendiaConfig"/>
-                </Border>
+                <StackPanel>
+                    <Border>
+						<Label Content="Aussehenseinstellungen"/>
+					</Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Value 1" Grid.Column="0"/>
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Value 2" Grid.Column="0"/>
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                </StackPanel>
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:LiniendiaConfigView}">
-                <Border>
-                    <Label Content="LiniendiaConfig"/>
-                </Border>
+                <StackPanel>
+                    <Border>
+                        <Label Content="LiniendiaConfig"/>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Value 1" Grid.Column="0"/>
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Value 2" Grid.Column="0"/>
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                </StackPanel>        
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
+
+
+

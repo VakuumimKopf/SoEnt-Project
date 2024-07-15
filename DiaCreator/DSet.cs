@@ -10,6 +10,7 @@ namespace DiaCreator
 {
     public class DSet
     {
+        private static int InstanceId = 0;
         private string name;
         public string Name
         {
@@ -29,10 +30,11 @@ namespace DiaCreator
             get => data;
         }
 
-        public DSet(string name_n, int id_n)
+        public DSet(string name_n)
         {
             this.name = name_n;
-            this.id = id_n;
+            Id = InstanceId;
+            InstanceId = InstanceId + 1;
         }
 
         public void AddData(string value1, string value2)

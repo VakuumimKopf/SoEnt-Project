@@ -10,6 +10,9 @@ namespace DiaCreator
     /// </summary>
     public partial class App : Application
     {
+        public static Reader CurrentReader {  get; set; }
+        public static Builder CurrentBuilder { get; set; } = new Builder();
+        public static DHolder CurrentDHolder { get; set; } = new DHolder();
         private void AppStartup(object sender, StartupEventArgs e) 
         {
 
