@@ -27,17 +27,8 @@ namespace DiaCreator
         
         private void DarstellenClick(object sender, RoutedEventArgs e) 
         {
-            Thread DiagrammThread = new Thread(ThreadStartingPoint);
-            DiagrammThread.SetApartmentState(ApartmentState.STA);
-            DiagrammThread.IsBackground = true;
-            DiagrammThread.Start();
+            var diabuilder = DiaBuilder.Instance();
+            diabuilder.Call("Liniendiagramm");
         }
-
-        private void ThreadStartingPoint() 
-        {
-            DiagrammWindow.getInstance().Show();
-            System.Windows.Threading.Dispatcher.Run();
-        }
-
     }
 }

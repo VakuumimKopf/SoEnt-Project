@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
 
 namespace DiaCreator
 {
@@ -18,21 +20,11 @@ namespace DiaCreator
     /// Interaktionslogik für Diagramm.xaml
     /// </summary>
     public partial class DiagrammWindow : Window
-    {
-        private static DiagrammWindow diagrammwininstance;   
-        public static DiagrammWindow getInstance() 
-        {
-            if (diagrammwininstance == null) 
-            {
-                diagrammwininstance = new DiagrammWindow();
-            }
-            return diagrammwininstance;
-        }
-        
-        private DiagrammWindow()
+    {       
+        public DiagrammWindow()
         {
             InitializeComponent();
+            this.DataContext =  DiaBuilder.Instance();
         }
-
     }
 }
