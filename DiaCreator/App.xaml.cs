@@ -10,10 +10,11 @@ namespace DiaCreator
     /// </summary>
     public partial class App : Application
     {
+        // Dies sind Propertys die global verfügbar sein müssen, sie beinhalten Objekte mit zentraler Funktionalität
+        public static Reader? CurrentReader {  get; set; }
+        public static Builder CurrentBuilder { get; } = new Builder();
+        public static DHolder CurrentDHolder { get; } = new DHolder();
         public static DiaBuilder? CurrentDiaBuilder { get; set; }
-        public static Reader CurrentReader {  get; set; }
-        public static Builder CurrentBuilder { get; set; } = new Builder();
-        public static DHolder CurrentDHolder { get; set; } = new DHolder();
         private void AppStartup(object sender, StartupEventArgs e) 
         {
 

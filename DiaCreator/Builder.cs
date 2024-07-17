@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DiaCreator
 {
-    public class Builder
+    public class Builder //Generiert von Parameter abhängig verschiedene Instanzen von Klassen
     {
         public Builder() 
         { 
 
         }
 
-        public Writer CreateWriter(string type) 
+        public Writer CreateWriter(string type)
         {
             switch (type)
             {
@@ -24,7 +24,7 @@ namespace DiaCreator
             }
         }
 
-        public ConfigView CreateConfigView(string type) 
+        public ConfigViewModell CreateConfigView(string type) 
         {
             switch (type)
             {
@@ -39,7 +39,7 @@ namespace DiaCreator
         {
             switch (type)
             {
-                case "csv": return new CSVReader(path, 0);
+                case "csv": return new CSVReader(path);
                 default: throw new Exception("Übergebener Reader Type existiert nicht");
             }
         }  

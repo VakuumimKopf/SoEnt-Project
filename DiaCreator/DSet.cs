@@ -24,8 +24,8 @@ namespace DiaCreator
             set => id = value;
         }
 
-        private List<string[]>? data = new List<string[]>();
-        public List<string[]>? Data
+        private List<string[]> data = new List<string[]>();
+        public List<string[]> Data
         {
             get => data;
         }
@@ -57,8 +57,8 @@ namespace DiaCreator
             get => id;
         }
 
-        private List<string[]>? data = new List<string[]>();
-        public List<string[]>? Data
+        private List<string[]> data = new List<string[]>();
+        public List<string[]> Data
         {
             get => data;
         }

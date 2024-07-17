@@ -101,7 +101,7 @@ namespace DiaCreator
 
                 }
             }
-            return null;
+            throw new Exception("Keinen Tabelhead gefunden");
         }
     }
 }

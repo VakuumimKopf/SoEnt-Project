@@ -18,17 +18,17 @@ namespace DiaCreator
  
     public partial class DatenWindow : Window
     {
-        public DatenWindow(string DiagrammArt, string path)
+        public DatenWindow(string DiagrammTyp)
         {
             InitializeComponent();
-            var config = new Config(DiagrammArt, new Builder());
-            this.DataContext = new DataWinViewModell(config);
+
+            //Der Daten Kontext wird auf die Klasse DatenWindowViewModell gelagert, dieser wird zusätzlich die Art des benötigten Diagramms im Konstruktor übergeben
+            this.DataContext = new DatenWindowViewModell(App.CurrentBuilder.CreateConfigView(DiagrammTyp));
         }
         
         private void DarstellenClick(object sender, RoutedEventArgs e) 
         {
-            var diabuilder = DiaBuilder.Instance();
-            diabuilder.Call("Liniendiagramm");
+
         }
     }
 }
