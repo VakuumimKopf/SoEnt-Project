@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DiaCreator
 {
-    public class BaseViewModell : INotifyPropertyChanged
+    public class BaseViewModell : INotifyPropertyChanged //Basis Klasse für alle ViewModell Klassen
     {
         public event PropertyChangedEventHandler PropertyChanged;
         

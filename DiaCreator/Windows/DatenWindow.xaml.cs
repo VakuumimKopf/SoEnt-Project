@@ -18,26 +18,17 @@ namespace DiaCreator
  
     public partial class DatenWindow : Window
     {
-        public DatenWindow(string DiagrammArt, string path)
+        public DatenWindow(string DiagrammTyp)
         {
             InitializeComponent();
-            var config = new Config(DiagrammArt, new Builder());
-            this.DataContext = new DataWinViewModell(App.CurrentDHolder, config);
+
+            //Der Daten Kontext wird auf die Klasse DatenWindowViewModell gelagert, dieser wird zusätzlich die Art des benötigten Diagramms im Konstruktor übergeben
+            this.DataContext = new DatenWindowViewModell(App.CurrentBuilder.CreateConfigView(DiagrammTyp));
         }
         
         private void DarstellenClick(object sender, RoutedEventArgs e) 
         {
-            Thread DiagrammThread = new Thread(ThreadStartingPoint);
-            DiagrammThread.SetApartmentState(ApartmentState.STA);
-            DiagrammThread.IsBackground = true;
-            DiagrammThread.Start();
-        }
 
-        private void ThreadStartingPoint() 
-        {
-            new DiagrammWindow().Show();
-            System.Windows.Threading.Dispatcher.Run();
         }
-
     }
 }

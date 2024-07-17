@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DiaCreator
 {
-    public class DataWinViewModell : BaseViewModell
+    public class DatenWindowViewModell : BaseViewModell
     {
-        private ObservableCollection<DSetViewModell> dsetitems;
-        public ObservableCollection<DSetViewModell> DSetItems
+        private ObservableCollection<DSetViewModell>? dsetitems;
+        public ObservableCollection<DSetViewModell>? DSetItems
         {
             get => dsetitems; 
             set 
@@ -23,8 +23,8 @@ namespace DiaCreator
             } 
         }
 
-        private ConfigViewModell config;
-        public ConfigViewModell Config
+        private ConfigViewModell? config;
+        public ConfigViewModell? Config
         {
             get => config;
             set
@@ -37,12 +37,13 @@ namespace DiaCreator
             }
         }
 
-        public DataWinViewModell(DHolder dHolder, Config config) 
+        public DatenWindowViewModell(ConfigViewModell Config_n) 
         {
-            var DSets = dHolder.GetAllData();
+            var DSets = App.CurrentDHolder.GetAllData();
             var DSetViewModells = DSets.Select(m => new DSetViewModell(m.Name, m.Id, m.Data));
             DSetItems = new ObservableCollection<DSetViewModell>(DSetViewModells);
-            Config = config;
+
+            Config = Config_n;
 
         }
 
