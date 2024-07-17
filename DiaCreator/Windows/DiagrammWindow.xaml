@@ -7,7 +7,5 @@
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
         Title="DiagrammWindow" Height="450" Width="800">
-    <lvc:CartesianChart
-        Series="{Binding Series}">
-    </lvc:CartesianChart>
+    <ContentPresenter Content="{Binding }"/>
 </Window>

@@ -42,7 +42,18 @@ namespace DiaCreator
                 case "csv": return new CSVReader(path, 0);
                 default: throw new Exception("Übergebener Reader Type existiert nicht");
             }
-        }  
+        }
+
+        public DiaBuilder CreateDiaBuilder(string type) 
+        {
+            switch (type)
+            {
+                case "Kreisdiagramm": return PieDiaBuilder.Instance();
+                case "Säulendiagramm": 
+                case "Liniendiagramm": return CartDiaBuilder.Instance(type);
+                default: throw new Exception("Übergabe DiaBuilder Type existiert nicht");
+            }
+        }
          
     }
 }

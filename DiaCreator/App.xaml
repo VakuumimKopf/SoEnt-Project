@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:DiaCreator"
              Startup="AppStartup"
-             StartupUri="Windows/StartWindow.xaml">
+             StartupUri="Windows/StartWindow.xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF">
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type local:DSetViewModell}">
@@ -108,6 +109,14 @@
                         </Grid>
                     </Border>
                 </StackPanel>        
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:CartDiaBuilder}">
+                <lvc:CartesianChart Series="{Binding Series}">
+                </lvc:CartesianChart>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:PieDiaBuilder}">
+                <lvc:PieChart Series="{Binding Series}">
+                </lvc:PieChart>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

@@ -8,24 +8,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using LiveChartsCore.Defaults;
+using Accessibility;
+using LiveChartsCore.SkiaSharpView.Extensions;
+using System.Windows;
 
 namespace DiaCreator
 {
-    public sealed class DiaBuilder
+    
+    public interface DiaBuilder 
     {
-        private ObservableCollection<ObservablePoint> _observablePoints = new ObservableCollection<ObservablePoint>();
+        public void Call();
+    }
+    public class CartDiaBuilder : DiaBuilder
+    {
+        private static string? _type;        
         public ObservableCollection<ISeries> Series { get; set; } = new ObservableCollection<ISeries>();
         
         private Writer? writer;
         
-        private static readonly Lazy<DiaBuilder> lazy = new Lazy<DiaBuilder>(GetInstance);
+        private static readonly Lazy<CartDiaBuilder> lazy = new Lazy<CartDiaBuilder>(GetInstance);
         
-        static DiaBuilder GetInstance()
+        static CartDiaBuilder GetInstance()
         {
-            return new DiaBuilder();
+            return new CartDiaBuilder();
         }
-        public static DiaBuilder Instance() { return lazy.Value; }
-        private DiaBuilder() 
+        public static CartDiaBuilder Instance(string type) 
+        {
+            _type = type;
+            return lazy.Value; 
+        }
+        private CartDiaBuilder() 
         {
             Thread DiagrammThread = new Thread(ThreadStartingPoint);
             DiagrammThread.SetApartmentState(ApartmentState.STA);
@@ -35,28 +47,66 @@ namespace DiaCreator
         private void ThreadStartingPoint()
         {
             var window = new DiagrammWindow();
+            window.DataContext = this;
             window.Show();
             System.Windows.Threading.Dispatcher.Run();
         }
-        public void Call(string type)
+        public void Call()
         {
-            writer = App.CurrentBuilder.CreateWriter(type);
+            writer = App.CurrentBuilder.CreateWriter(_type);
             var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
             foreach (var obj in obj_list) 
             {
                 Series.Add(obj);
             }            
         }
-        public void Call2(string type)
+    }
+    public class PieDiaBuilder : DiaBuilder 
+    {
+        public ObservableCollection<ISeries> Series { get; set; } = new ObservableCollection<ISeries>();
+
+        private static Window? window { get; set; }
+
+        private static Thread? thread { get; set; }
+
+        private Writer? writer;
+
+        private static readonly Lazy<PieDiaBuilder> lazy = new Lazy<PieDiaBuilder>(GetInstance);
+
+        static PieDiaBuilder GetInstance()
         {
-            _observablePoints = new ObservableCollection<ObservablePoint>();
-            _observablePoints.Add(new ObservablePoint(1, 2));
-            _observablePoints.Add(new ObservablePoint(5, 7));
-            _observablePoints.Add(new ObservablePoint(8, 4));
-
-
-            Series.Add(new LineSeries<ObservablePoint> { Values= _observablePoints});
-            
+            return new PieDiaBuilder();
+        }
+        public static PieDiaBuilder Instance()
+        {
+            if (thread != null) 
+            {
+                thread.Start();
+            }
+            return lazy.Value;
+        }
+        private PieDiaBuilder()
+        {
+            thread = new Thread(ThreadStartingPoint);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.IsBackground = true;
+            thread.Start();
+        }
+        private void ThreadStartingPoint()
+        {
+            window = new DiagrammWindow();
+            window.DataContext = this;
+            window.Show();
+            System.Windows.Threading.Dispatcher.Run();
+        }
+        public void Call()
+        {
+            writer = App.CurrentBuilder.CreateWriter("Kreisdiagramm");
+            var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
+            foreach (var obj in obj_list) 
+            {
+                Series.Add(obj);
+            }
         }
     }
 }

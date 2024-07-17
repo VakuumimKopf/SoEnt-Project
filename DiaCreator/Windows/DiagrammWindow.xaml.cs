@@ -24,7 +24,6 @@ namespace DiaCreator
         public DiagrammWindow()
         {
             InitializeComponent();
-            this.DataContext =  DiaBuilder.Instance();
         }
     }
 }
