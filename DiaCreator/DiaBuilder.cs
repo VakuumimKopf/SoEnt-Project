@@ -11,6 +11,7 @@ using LiveChartsCore.Defaults;
 using Accessibility;
 using LiveChartsCore.SkiaSharpView.Extensions;
 using System.Windows;
+using System.Diagnostics;
 
 namespace DiaCreator
 {
@@ -23,7 +24,7 @@ namespace DiaCreator
     {
         private static string? _type;        
         public ObservableCollection<ISeries> Series { get; set; } = new ObservableCollection<ISeries>();
-        
+        private Window? window { get; set; }
         private Writer? writer;
         
         private static readonly Lazy<CartDiaBuilder> lazy = new Lazy<CartDiaBuilder>(GetInstance);
@@ -39,35 +40,36 @@ namespace DiaCreator
         }
         private CartDiaBuilder() 
         {
-            Thread DiagrammThread = new Thread(ThreadStartingPoint);
-            DiagrammThread.SetApartmentState(ApartmentState.STA);
-            DiagrammThread.IsBackground = true;
-            DiagrammThread.Start();
         }
-        private void ThreadStartingPoint()
-        {
-            var window = new DiagrammWindow();
-            window.DataContext = this;
-            window.Show();
-            System.Windows.Threading.Dispatcher.Run();
-        }
+
         public void Call()
         {
-            writer = App.CurrentBuilder.CreateWriter(_type);
-            var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
-            foreach (var obj in obj_list) 
+            if (Application.Current.Windows.OfType<DiagrammWindow>().Any() == false)
             {
-                Series.Add(obj);
-            }            
+                window = null;
+                Series = new ObservableCollection<ISeries>();
+            }
+            
+            if (this.window == null)
+            {
+                window = new DiagrammWindow();
+                window.DataContext = this;
+                window.Show();
+
+                writer = App.CurrentBuilder.CreateWriter(_type);
+                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
+                foreach (var obj in obj_list)
+                {
+                    Series.Add(obj);
+                }
+            } else { Debug.WriteLine("Test"); }      
         }
     }
     public class PieDiaBuilder : DiaBuilder 
     {
         public ObservableCollection<ISeries> Series { get; set; } = new ObservableCollection<ISeries>();
 
-        private static Window? window { get; set; }
-
-        private static Thread? thread { get; set; }
+        private Window? window { get; set; }
 
         private Writer? writer;
 
@@ -79,33 +81,25 @@ namespace DiaCreator
         }
         public static PieDiaBuilder Instance()
         {
-            if (thread != null) 
-            {
-                thread.Start();
-            }
             return lazy.Value;
         }
         private PieDiaBuilder()
         {
-            thread = new Thread(ThreadStartingPoint);
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.IsBackground = true;
-            thread.Start();
-        }
-        private void ThreadStartingPoint()
-        {
-            window = new DiagrammWindow();
-            window.DataContext = this;
-            window.Show();
-            System.Windows.Threading.Dispatcher.Run();
-        }
+        }  
         public void Call()
         {
-            writer = App.CurrentBuilder.CreateWriter("Kreisdiagramm");
-            var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
-            foreach (var obj in obj_list) 
+            if (window == null)
             {
-                Series.Add(obj);
+                window = new DiagrammWindow();
+                window.DataContext = this;
+                window.Show();
+
+                writer = App.CurrentBuilder.CreateWriter("Kreisdiagramm");
+                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
+                foreach (var obj in obj_list)
+                {
+                    Series.Add(obj);
+                }
             }
         }
     }

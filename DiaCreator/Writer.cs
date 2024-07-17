@@ -21,7 +21,6 @@ namespace DiaCreator
     public class KreisdiaWriter : Writer
     {
         private int UsedValue {  get; set; }
-        private ObservableCollection<ObservablePoint> _observablePoints;
         public KreisdiaWriter() 
         {
             UsedValue = 1;
@@ -56,8 +55,26 @@ namespace DiaCreator
 
     public class SaulendiaWriter : Writer 
     {
+        private ObservableCollection<ObservablePoint> _observablePoints;
+        private ISeries GenerateSeriesObj(DSet set)
+        {
+            _observablePoints = new ObservableCollection<ObservablePoint>();
+            foreach (var d in set.Data)
+            {
+                _observablePoints.Add(new ObservablePoint(Double.Parse(d[0]), Double.Parse(d[1])));
+            }
+            var obj = new ColumnSeries<ObservablePoint>() { Values = _observablePoints, Name = set.Name };
+            return obj;
+        }
         public List<ISeries> GenerateSeriesList(List<DSet> sets)
-        { return null; }
+        {
+            var list = new List<ISeries>();
+            foreach (DSet set in sets)
+            {
+                list.Add(this.GenerateSeriesObj(set));
+            }
+            return list;
+        }
 
     }
 
