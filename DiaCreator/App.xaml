@@ -43,7 +43,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Anzeigeart" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="2" >
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="2">
                                 <ComboBoxItem Content="Absolute Werte"/>
                                 <ComboBoxItem Content="Relative Werte"/>
                             </ComboBox>
@@ -92,7 +92,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Value 1" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding NameCollection}">
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
                             </ComboBox>
                         </Grid>
                     </Border>

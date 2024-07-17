@@ -28,7 +28,8 @@ namespace DiaCreator
         
         private void DarstellenClick(object sender, RoutedEventArgs e) 
         {
-
+            var diabuilder = DiaBuilder.Instance();
+            diabuilder.Call("Liniendiagramm");
         }
     }
 }
