@@ -62,7 +62,7 @@ namespace DiaCreator
                 {
                     Series.Add(obj);
                 }
-            } else { Debug.WriteLine("Test"); }      
+            }   
         }
     }
     public class PieDiaBuilder : DiaBuilder 
@@ -88,6 +88,12 @@ namespace DiaCreator
         }  
         public void Call()
         {
+            if (Application.Current.Windows.OfType<DiagrammWindow>().Any() == false)
+            {
+                window = null;
+                Series = new ObservableCollection<ISeries>();
+            }
+
             if (window == null)
             {
                 window = new DiagrammWindow();

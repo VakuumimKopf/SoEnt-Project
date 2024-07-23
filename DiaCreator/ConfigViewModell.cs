@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 using DiaCreator.BaseClasses;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -17,6 +20,15 @@ namespace DiaCreator
 
     public class KreisdiaConfigView : ConfigViewModell
     {
+        private string? selectedName = null;
+        public string? SelectedName {
+            get => selectedName;
+            set 
+            {
+                selectedName = value;
+                Debug.WriteLine(value + "ausgewählt");
+            } 
+        }
         public List<string> NameCollection { get; set; } = new List<string>();
         public KreisdiaConfigView() 
         {
