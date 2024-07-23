@@ -39,12 +39,19 @@ namespace DiaCreator
             Id = InstanceId;
             InstanceId = InstanceId + 1;
         }
+        public void AddData(string value1)
+        {
+            data.Add([value1]);
+        }
 
         public void AddData(string value1, string value2)
         {
             data.Add([value1, value2]);
         }
-
+        public void AddData(string value1, string value2, string value3)
+        {
+            data.Add([value1, value2, value3]);
+        }
     }
 
     public class DSetViewModell : BaseViewModell

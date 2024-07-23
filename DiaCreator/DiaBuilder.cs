@@ -57,11 +57,7 @@ namespace DiaCreator
                 window.Show();
                
                 writer = App.CurrentBuilder.CreateWriter(_type);
-                Debug.WriteLine("New");
-                foreach (var item in config.hiddenDSets)
-                {
-                    Debug.WriteLine(item + "\t");
-                }
+
                 var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllExept(config.hiddenDSets.ToArray<int>()));
                 foreach (var obj in obj_list)
                 {

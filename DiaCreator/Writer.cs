@@ -20,7 +20,7 @@ namespace DiaCreator
 
     public class KreisdiaWriter : Writer
     {
-        private int UsedValue {  get; set; }
+        public int UsedValue {  get; set; }
         public KreisdiaWriter() 
         {
             UsedValue = 1;

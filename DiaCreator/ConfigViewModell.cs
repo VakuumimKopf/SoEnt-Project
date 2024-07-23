@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using DiaCreator.BaseClasses;
+using static System.Collections.Specialized.NameObjectCollectionBase;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DiaCreator
@@ -33,18 +34,13 @@ namespace DiaCreator
 
     public class KreisdiaConfigView : ConfigViewModell
     {
-        private string? selectedKategorie = null;
-        public string? SelectedKategorie
-        {
-            get => selectedKategorie;
-            set => selectedKategorie = value;
-        }
         private string? selectedValue = null;
         public string? SelectedValue
         {
             get => selectedValue;
             set => selectedValue = value;
         }
+
         private string? selectedAnzeige = null;
         public string? SelectedAnzeige
         {
@@ -68,8 +64,7 @@ namespace DiaCreator
 
         public override void FillUi() 
         {
-            string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
-            foreach (string item in TableHeadString)
+            foreach (string item in App.CurrentReader.GetValueHead())
             {
                 KreisCollection.Add(item);
             }
@@ -118,8 +113,7 @@ namespace DiaCreator
 
         public override void FillUi()
         {
-            string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
-            foreach (string item in TableHeadString)
+            foreach (string item in App.CurrentReader.GetValueHead())
             {
                 SauCollection.Add(item);
             }
@@ -172,8 +166,7 @@ namespace DiaCreator
 
         public override void FillUi()
         {
-            string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
-            foreach (string item in TableHeadString)
+            foreach (string item in App.CurrentReader.GetValueHead())
             {
                 LinienCollection.Add(item);
             }
