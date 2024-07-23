@@ -64,7 +64,6 @@ namespace DiaCreator
             {
                 if (T.Name == Data[katindex])
                 {
-                    Debug.WriteLine(valueindex.Length);
                     switch(this.valueindex.Length) 
                     {
                         case 1:

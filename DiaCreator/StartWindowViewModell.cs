@@ -73,9 +73,10 @@ namespace DiaCreator
 
             // Das Fenster DataWindow wird erzeugt und das Startfenster geschlossen
             if (diagrammtyp == null) { throw new Exception("Kein Diagrammtyp übergeben"); }
-            var DatenWindow = new DatenWindow();
-            DatenWindow.DataContext = new DatenWindowViewModell(diagrammtyp);
-            DatenWindow.Show();
+            var Headfestlegung = new Headfestlegung();
+            Headfestlegung.DataContext = new HeadfestlegungViewModell(diagrammtyp);
+            Headfestlegung.Show();
+
             OnRequestClose(this, new EventArgs());
         }
     }
