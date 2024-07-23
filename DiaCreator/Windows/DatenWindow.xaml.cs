@@ -18,17 +18,9 @@ namespace DiaCreator
  
     public partial class DatenWindow : Window
     {
-        public DatenWindow(string DiagrammTyp)
+        public DatenWindow()
         {
             InitializeComponent();
-
-            //Der Daten Kontext wird auf die Klasse DatenWindowViewModell gelagert, dieser wird zusätzlich die Art des benötigten Diagramms im Konstruktor übergeben
-            this.DataContext = new DatenWindowViewModell(App.CurrentBuilder.CreateConfigView(DiagrammTyp));
-        }
-        
-        private void DarstellenClick(object sender, RoutedEventArgs e) 
-        {
-
         }
     }
 }

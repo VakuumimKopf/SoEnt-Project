@@ -20,7 +20,7 @@ namespace DiaCreator
         private readonly string Path;
         public int Kategorie { get; set; }
 
-        public CSVReader(string path, int kategorie = 0)
+        public CSVReader(string path, int kategorie)
         {
             this.Path = path;
             this.Kategorie = kategorie;

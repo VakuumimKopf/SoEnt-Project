@@ -6,8 +6,6 @@
         xmlns:local="clr-namespace:DiaCreator"
         mc:Ignorable="d"
         Title="DatenWindow" Height="450" Width="800">
-    <Window.Resources>
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -29,6 +27,6 @@
         <Border Grid.Row="1" Grid.Column="1" Margin="10" BorderBrush="Blue">
             <ContentPresenter Content="{Binding Config}"/>
         </Border>
-        <Button Grid.Column="1" Grid.Row="2" Content="Darstellen" Margin="10" Click="DarstellenClick"/>
+        <Button Grid.Column="1" Grid.Row="2" Content="Darstellen" Margin="10" Command="{Binding Darstellen}"/>
     </Grid>
 </Window>

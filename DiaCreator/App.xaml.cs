@@ -14,6 +14,7 @@ namespace DiaCreator
         public static Reader? CurrentReader {  get; set; }
         public static Builder CurrentBuilder { get; } = new Builder();
         public static DHolder CurrentDHolder { get; } = new DHolder();
+        public static DiaBuilder? CurrentDiaBuilder { get; set; }
         private void AppStartup(object sender, StartupEventArgs e) 
         {
 

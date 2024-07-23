@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:DiaCreator"
              Startup="AppStartup"
-             StartupUri="Windows/StartWindow.xaml">
+             StartupUri="Windows/StartWindow.xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF">
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type local:DSetViewModell}">
@@ -32,7 +33,8 @@
 								<ColumnDefinition/>
 							</Grid.ColumnDefinitions>
                             <Label Content="Value" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" ItemsSource ="{Binding NameCollection}">
+                            <ComboBox Name="ValueComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                      ItemsSource ="{Binding NameCollection}" SelectedItem="{Binding SelectedName}">
                             </ComboBox>
                         </Grid>
 				    </Border>
@@ -43,7 +45,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Anzeigeart" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="2" >
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="2">
                                 <ComboBoxItem Content="Absolute Werte"/>
                                 <ComboBoxItem Content="Relative Werte"/>
                             </ComboBox>
@@ -92,7 +94,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Value 1" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding NameCollection}">
+                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
                             </ComboBox>
                         </Grid>
                     </Border>
@@ -108,6 +110,14 @@
                         </Grid>
                     </Border>
                 </StackPanel>        
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:CartDiaBuilder}">
+                <lvc:CartesianChart Series="{Binding Series}">
+                </lvc:CartesianChart>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:PieDiaBuilder}">
+                <lvc:PieChart Series="{Binding Series}">
+                </lvc:PieChart>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
