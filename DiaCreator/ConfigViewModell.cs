@@ -20,13 +20,34 @@ namespace DiaCreator
 
     public class KreisdiaConfigView : ConfigViewModell
     {
-        private string? selectedName = null;
-        public string? SelectedName 
+        private string? selectedKategorie = null;
+        public string? SelectedKategorie
         {
-            get => selectedName;
-            set => selectedName = value;
+            get => selectedKategorie;
+            set => selectedKategorie = value;
         }
-        public List<string> NameCollection { get; set; } = new List<string>();
+        private string? selectedValue = null;
+        public string? SelectedValue
+        {
+            get => selectedValue;
+            set => selectedValue = value;
+        }
+        private string? selectedAnzeige = null;
+        public string? SelectedAnzeige
+        {
+            get => selectedAnzeige;
+            set => selectedAnzeige = value;
+        }
+        private string? selectedDiagramm = null;
+        public string? SelectedDiagramm
+        {
+            get => selectedDiagramm;
+            set => selectedDiagramm = value;
+        }
+        
+        public List<string> KreisCollection { get; set; } = new List<string>();
+        public List<string> AnzeigeCollection { get; set; } = new List<string> {"Absolut","Relativ"};
+        public List<string> DiagrammCollection { get; set; } = new List<string> {"Basic Pie","Pushout","Outside Labels"};
         public KreisdiaConfigView() 
         {
             FillUi();   
@@ -36,17 +57,45 @@ namespace DiaCreator
             string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
             foreach (string item in TableHeadString)
             {
-                NameCollection.Add(item);
+                KreisCollection.Add(item);
             }
         }
         public override Writer GenerateWriter()
         {
             return new KreisdiaWriter();
         }
+
+
     }
 
     public class SaulendiaConfigView : ConfigViewModell
     {
+        private string? selectedKategorie = null;
+        public string? SelectedKategorie
+        {
+            get => selectedKategorie;
+            set => selectedKategorie = value;
+        }
+        private string? selectedxAchse = null;
+        public string? SelectedxAchse
+        {
+            get => selectedxAchse;
+            set => selectedxAchse = value;
+        }
+        private string? selectedyAchse = null;
+        public string? SelectedyAchse
+        {
+            get => selectedyAchse;
+            set => selectedyAchse = value;
+        }
+        private string? selectedDiagramm = null;
+        public string? SelectedDiagramm
+        {
+            get => selectedDiagramm;
+            set => selectedDiagramm = value;
+        }
+        public List<string> AnzeigeCollection { get; set; } = new List<string> { "Absolut", "Relativ" };
+        public List<string> DiagrammCollection { get; set; } = new List<string> { "Basic Line", "Zooming and panning", "Line smoothness" };
         public List<string> SauCollection { get; set; } = new List<string>();
         public SaulendiaConfigView() 
         {
@@ -68,7 +117,39 @@ namespace DiaCreator
 
     public class LiniendiaConfigView : ConfigViewModell 
     {
-        public List<string> NameCollection { get; set; } = new List<string>();
+        private string? selectedKategorie = null;
+        public string? SelectedKategorie
+        {
+            get => selectedKategorie;
+            set => selectedKategorie = value;
+        }
+        private string? selectedxAchse = null;
+        public string? SelectedxAchse
+        {
+            get => selectedxAchse;
+            set => selectedxAchse = value;
+        }
+        private string? selectedyAchse = null;
+        public string? SelectedyAchse
+        {
+            get => selectedyAchse;
+            set => selectedyAchse = value;
+        }
+        private string? selectedAnzeige = null;
+        public string? SelectedAnzeige
+        {
+            get => selectedAnzeige;
+            set => selectedAnzeige = value;
+        }
+        private string? selectedDiagramm = null;
+        public string? SelectedDiagramm
+        {
+            get => selectedDiagramm;
+            set => selectedDiagramm = value;
+        }
+        public List<string> AnzeigeCollection { get; set; } = new List<string> { "Absolut", "Relativ" };
+        public List<string> DiagrammCollection { get; set; } = new List<string> { "Basic bars", "Column width", "Dynamic visibility" };
+        public List<string> LinienCollection { get; set; } = new List<string>();
         public LiniendiaConfigView() 
         {
             FillUi();
@@ -78,7 +159,7 @@ namespace DiaCreator
             string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
             foreach (string item in TableHeadString)
             {
-                NameCollection.Add(item);
+                LinienCollection.Add(item);
             }
         }
         public override Writer GenerateWriter()

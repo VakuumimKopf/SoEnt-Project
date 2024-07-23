@@ -26,7 +26,19 @@
                     <Border>
                         <Label Content="Aussehenseinstellungen"/>
                     </Border>
-					<Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Kategoorie" Grid.Column="0"/>
+                            <ComboBox Name="KategorieComboBox" Margin="0,10" IsEditable="false" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding KreisCollection}" SelectedItem="{Binding SelectedKategorie}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition/>
@@ -34,7 +46,7 @@
 							</Grid.ColumnDefinitions>
                             <Label Content="Value" Grid.Column="0"/>
                             <ComboBox Name="ValueComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
-                                      ItemsSource ="{Binding NameCollection}" SelectedItem="{Binding SelectedName}">
+                                ItemsSource ="{Binding KreisCollection}" SelectedItem="{Binding SelectedValue}">
                             </ComboBox>
                         </Grid>
 				    </Border>
@@ -45,9 +57,20 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Anzeigeart" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="2">
-                                <ComboBoxItem Content="Absolute Werte"/>
-                                <ComboBoxItem Content="Relative Werte"/>
+                            <ComboBox Name="AnzeigeComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding AnzeigeCollection}" SelectedItem="{Binding SelectedAnzeige}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Diagrammart" Grid.Column="0"/>
+                            <ComboBox Name="DiagrammComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding DiagrammCollection}" SelectedItem="{Binding SelectedDiagramm}">
                             </ComboBox>
                         </Grid>
                     </Border>
@@ -56,16 +79,17 @@
             <DataTemplate DataType="{x:Type local:SaulendiaConfigView}">
                 <StackPanel>
                     <Border>
-						<Label Content="Aussehenseinstellungen"/>
-					</Border>
+                        <Label Content="Aussehenseinstellungen"/>
+                    </Border>
                     <Border>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Value 1" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
+                            <Label Content="Kategoorie" Grid.Column="0"/>
+                            <ComboBox Name="KategorieComboBox" Margin="0,10" IsEditable="false" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding SauCollection}" SelectedItem="{Binding SelectedKategorie}">
                             </ComboBox>
                         </Grid>
                     </Border>
@@ -75,8 +99,33 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Value 2" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
+                            <Label Content="xAchse" Grid.Column="0"/>
+                            <ComboBox Name="xAchseComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding SauCollection}" SelectedItem="{Binding SelectedValue}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="yAchse" Grid.Column="0"/>
+                            <ComboBox Name="yAchseComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding SauCollection}" SelectedItem="{Binding SelectedValue}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Diagrammart" Grid.Column="0"/>
+                            <ComboBox Name="DiagrammComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding DiagrammCollection}" SelectedItem="{Binding SelectedDiagramm}">
                             </ComboBox>
                         </Grid>
                     </Border>
@@ -85,7 +134,7 @@
             <DataTemplate DataType="{x:Type local:LiniendiaConfigView}">
                 <StackPanel>
                     <Border>
-                        <Label Content="LiniendiaConfig"/>
+                        <Label Content="Aussehenseinstellungen"/>
                     </Border>
                     <Border>
                         <Grid>
@@ -93,8 +142,9 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Value 1" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding SauCollection}">
+                            <Label Content="Kategoorie" Grid.Column="0"/>
+                            <ComboBox Name="KategorieComboBox" Margin="0,10" IsEditable="false" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding LinienCollection}" SelectedItem="{Binding SelectedKategorie}">
                             </ComboBox>
                         </Grid>
                     </Border>
@@ -104,8 +154,45 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Value 2" Grid.Column="0"/>
-                            <ComboBox Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="3" ItemsSource ="{Binding NameCollection}">
+                            <Label Content="xAchse" Grid.Column="0"/>
+                            <ComboBox Name="xAchseComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding LinienCollection}" SelectedItem="{Binding SelectedValue}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="yAchse" Grid.Column="0"/>
+                            <ComboBox Name="yAchseComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding LinienCollection}" SelectedItem="{Binding SelectedValue}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Anzeigeart" Grid.Column="0"/>
+                            <ComboBox Name="AnzeigeComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding AnzeigeCollection}" SelectedItem="{Binding SelectedAnzeige}">
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Diagrammart" Grid.Column="0"/>
+                            <ComboBox Name="DiagrammComboBox" Margin="0,10" IsEditable="False" IsReadOnly="True" Grid.Column="1" 
+                                ItemsSource ="{Binding DiagrammCollection}" SelectedItem="{Binding SelectedDiagramm}">
                             </ComboBox>
                         </Grid>
                     </Border>
