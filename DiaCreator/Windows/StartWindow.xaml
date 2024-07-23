@@ -27,8 +27,7 @@
             </ComboBox>
         </StackPanel>
         <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" 
-                Content="Erstellen" Grid.Row="1" Command="{Binding ClickErstellenNeuesProjekt}"
-                CommandParameter="{Binding ElementName=StartWindow}"/>
+                Content="Erstellen" Grid.Row="1" Command="{Binding ClickErstellenNeuesProjekt}"/>
     </Grid>
 
 </Window>

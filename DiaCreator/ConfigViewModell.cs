@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,20 @@ namespace DiaCreator
 {
     public abstract class ConfigViewModell : BaseViewModell
     {
+        public List<int> hiddenDSets = new List<int>();
         public abstract void FillUi();
         public abstract Writer GenerateWriter();
+
+        public void DSetEvent(object sender, int id) 
+        {
+            if(hiddenDSets.Contains(id)) 
+            {
+                hiddenDSets.Remove(id);
+            } else 
+            { 
+                hiddenDSets.Add(id); 
+            }
+        }
     }
 
     public class KreisdiaConfigView : ConfigViewModell
@@ -52,6 +65,7 @@ namespace DiaCreator
         {
             FillUi();   
         }
+
         public override void FillUi() 
         {
             string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
@@ -101,6 +115,7 @@ namespace DiaCreator
         {
             FillUi();
         }
+
         public override void FillUi()
         {
             string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");
@@ -154,6 +169,7 @@ namespace DiaCreator
         {
             FillUi();
         }
+
         public override void FillUi()
         {
             string[] TableHeadString = (App.CurrentReader.GetTableHead()).Split(";");

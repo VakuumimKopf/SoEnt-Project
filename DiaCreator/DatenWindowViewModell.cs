@@ -47,12 +47,11 @@ namespace DiaCreator
         public DatenWindowViewModell(string Diagrammtyp) 
         {
             diagrammtyp = Diagrammtyp;
-            
-            var DSets = App.CurrentDHolder.GetAllData();
-            var DSetViewModells = DSets.Select(m => new DSetViewModell(m.Name, m.Id, m.Data));
-            DSetItems = new ObservableCollection<DSetViewModell>(DSetViewModells);
-
             Config = App.CurrentBuilder.CreateConfigView(Diagrammtyp);
+
+            var DSets = App.CurrentDHolder.GetAllData();
+            var DSetViewModells = DSets.Select(m => new DSetViewModell(m.Name, m.Id, m.Data, Config));
+            DSetItems = new ObservableCollection<DSetViewModell>(DSetViewModells);
 
             Darstellen = new RelayCommand(parameter => DiaDarstellen());
         }
@@ -60,7 +59,7 @@ namespace DiaCreator
         private void DiaDarstellen() 
         {
             var diabuilder = App.CurrentBuilder.CreateDiaBuilder(diagrammtyp);
-            diabuilder.Call();
+            diabuilder.Call(config);
         }
     }
 }

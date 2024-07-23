@@ -18,7 +18,7 @@ namespace DiaCreator
     
     public interface DiaBuilder 
     {
-        public void Call();
+        public void Call(ConfigViewModell config);
     }
     public class CartDiaBuilder : DiaBuilder
     {
@@ -42,7 +42,7 @@ namespace DiaCreator
         {
         }
 
-        public void Call()
+        public void Call(ConfigViewModell config)
         {
             if (Application.Current.Windows.OfType<DiagrammWindow>().Any() == false)
             {
@@ -55,9 +55,14 @@ namespace DiaCreator
                 window = new DiagrammWindow();
                 window.DataContext = this;
                 window.Show();
-
+               
                 writer = App.CurrentBuilder.CreateWriter(_type);
-                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
+                Debug.WriteLine("New");
+                foreach (var item in config.hiddenDSets)
+                {
+                    Debug.WriteLine(item + "\t");
+                }
+                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllExept(config.hiddenDSets.ToArray<int>()));
                 foreach (var obj in obj_list)
                 {
                     Series.Add(obj);
@@ -86,7 +91,7 @@ namespace DiaCreator
         private PieDiaBuilder()
         {
         }  
-        public void Call()
+        public void Call(ConfigViewModell config)
         {
             if (Application.Current.Windows.OfType<DiagrammWindow>().Any() == false)
             {
@@ -101,7 +106,7 @@ namespace DiaCreator
                 window.Show();
 
                 writer = App.CurrentBuilder.CreateWriter("Kreisdiagramm");
-                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
+                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllExept(config.hiddenDSets.ToArray<int>()));
                 foreach (var obj in obj_list)
                 {
                     Series.Add(obj);
