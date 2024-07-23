@@ -44,6 +44,7 @@ namespace DiaCreator
             get => selectedDiagramm;
             set => selectedDiagramm = value;
         }
+        
         public List<string> KreisCollection { get; set; } = new List<string>();
         public List<string> AnzeigeCollection { get; set; } = new List<string> {"Absolut","Relativ"};
         public List<string> DiagrammCollection { get; set; } = new List<string> {"Basic Pie","Pushout","Outside Labels"};
