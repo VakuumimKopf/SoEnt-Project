@@ -21,7 +21,7 @@ namespace DiaCreator
     {
         public Headfestlegung()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
     }
 }

@@ -118,7 +118,7 @@ namespace DiaCreator
                 return ComboboxItems.Where(x => x != SelectedItem1 && x != SelectedItem2 && x != SelectedItem3);
             }
         }
-
+        public event EventHandler OnRequestClose;
         public ICommand ClickBestatigen { get; set; }
         public HeadfestlegungViewModell(string Diagrammtyp)
         {
@@ -132,9 +132,30 @@ namespace DiaCreator
         }
         public void Bestatigen() 
         {
+            var list = new List<KeyValuePair<string, int>>();
+            if (_selectedItem1 != null)
+            {
+                list.Add(new KeyValuePair<string, int>(_selectedItem1, 1));
+            }
+            if (_selectedItem2 != null)
+            {
+                list.Add(new KeyValuePair<string, int>(_selectedItem2, 1));
+            }
+            if (_selectedItem3 != null) 
+            {
+                list.Add(new KeyValuePair<string, int>(_selectedItem3, 1));                
+            }
+            list.Add(new KeyValuePair<string, int>(_selectedItemKat, 2));
+
+            
+
+            App.CurrentReader.SetBalancedTabelHead(list);
+            App.CurrentDHolder.AddDataList(App.CurrentReader.GetFileData());
             var DatenWindow = new DatenWindow();
             DatenWindow.DataContext = new DatenWindowViewModell(diagrammtyp);
             DatenWindow.Show();
+
+            OnRequestClose(this, new EventArgs());
         }
     }
 }

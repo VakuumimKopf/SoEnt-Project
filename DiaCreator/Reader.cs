@@ -17,6 +17,8 @@ namespace DiaCreator
         public List<DSet> GetFileData();
         public string[] GetValueHead();
 
+        public void SetBalancedTabelHead(List<KeyValuePair<string, int>> list);
+
     }
 
     public class CSVReader : Reader
@@ -26,19 +28,22 @@ namespace DiaCreator
         private int katindex;
         private int[] valueindex;
 
-        public List<KeyValuePair<string, int>> BalancedTabelHead = new List<KeyValuePair<string, int>>()
-        {
+        private List<KeyValuePair<string, int>> BalancedTabelHead;
+        /*{
             new KeyValuePair<string, int>("Prüfung", 2),
             new KeyValuePair<string, int>("Jahr", 1),
             new KeyValuePair<string, int>("Durchgefallen", 1),
             new KeyValuePair<string, int>("Egal", 0)
-        };
+        };*/
 
         public CSVReader(string path)
         {
             this.Path = path;
         }
-
+        public void SetBalancedTabelHead(List<KeyValuePair<string, int>> list)
+        {
+            BalancedTabelHead = list;
+        }
 
         private bool DSetExist(List<DSet> DSets, string Data) // Schaut ob die DSet Kategorie schon existiert
         {
