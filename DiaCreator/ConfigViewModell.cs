@@ -21,13 +21,10 @@ namespace DiaCreator
     public class KreisdiaConfigView : ConfigViewModell
     {
         private string? selectedName = null;
-        public string? SelectedName {
+        public string? SelectedName 
+        {
             get => selectedName;
-            set 
-            {
-                selectedName = value;
-                Debug.WriteLine(value + "ausgewählt");
-            } 
+            set => selectedName = value;
         }
         public List<string> NameCollection { get; set; } = new List<string>();
         public KreisdiaConfigView() 
