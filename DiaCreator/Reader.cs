@@ -16,8 +16,8 @@ namespace DiaCreator
         public string[] GetTableHead();
         public List<DSet> GetFileData();
         public string[] GetValueHead();
-
         public void SetBalancedTabelHead(List<KeyValuePair<string, int>> list);
+        public int GetDataIndex(string key);
 
     }
 
@@ -27,6 +27,8 @@ namespace DiaCreator
 
         private int katindex;
         private int[] valueindex;
+
+        private List<KeyValuePair<string, int>> DSetMap = new List<KeyValuePair<string, int>>();
 
         private List<KeyValuePair<string, int>> BalancedTabelHead;
         /*{
@@ -101,11 +103,14 @@ namespace DiaCreator
         {
             string[] headelements = GetTableHead();
             var ids = new List<int>();
+            int i = 0;
             foreach (var item in BalancedTabelHead)
             {
                 if (item.Value == 1) 
                 {
-                    ids.Add(this.GetHeadElementIndex(item.Key));         
+                    ids.Add(this.GetHeadElementIndex(item.Key));
+                    DSetMap.Add(new KeyValuePair<string, int>(item.Key, i));
+                    i++;
                 }
             }
             return ids;
@@ -159,6 +164,15 @@ namespace DiaCreator
                 }
             }
             return s;
+        }
+
+        public int GetDataIndex(string key)
+        {
+            foreach(var item in DSetMap) 
+            {
+                if(key == item.Key) { return item.Value; }
+            }
+            throw new Exception("Gesuchter Datenpunkt nicht vorhanden in DSets");
         }
     }
 }

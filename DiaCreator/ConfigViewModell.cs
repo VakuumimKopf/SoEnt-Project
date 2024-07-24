@@ -56,7 +56,6 @@ namespace DiaCreator
         
         public List<string> KreisCollection { get; set; } = new List<string>();
         public List<string> AnzeigeCollection { get; set; } = new List<string> {"Absolut","Relativ"};
-        public List<string> DiagrammCollection { get; set; } = new List<string> {"Basic Pie","Pushout","Outside Labels"};
         public KreisdiaConfigView() 
         {
             FillUi();   
@@ -71,7 +70,13 @@ namespace DiaCreator
         }
         public override Writer GenerateWriter()
         {
-            return new KreisdiaWriter();
+            return new KreisdiaWriter()
+            {
+                UsedValue = App.CurrentReader.GetDataIndex(selectedValue),
+                Anzeige = selectedAnzeige,
+                Pushout = App.CurrentReader.GetHeadElementIndex(selectedDiagramm)
+
+            };
         }
 
 
@@ -79,33 +84,51 @@ namespace DiaCreator
 
     public class SaulendiaConfigView : ConfigViewModell
     {
-        private string? selectedKategorie = null;
-        public string? SelectedKategorie
+        private List<string> saucollection = new List<string>();
+        public IEnumerable<string> SauCollection { get => saucollection; }
+        public IEnumerable<string> XAchseCollection
         {
-            get => selectedKategorie;
-            set => selectedKategorie = value;
+            get
+            {
+                return SauCollection.Where(x => x != SelectedyAchse);
+            }
         }
-        private string? selectedxAchse = null;
-        public string? SelectedxAchse
+        private string selectedxAchse;
+        public string SelectedxAchse
         {
             get => selectedxAchse;
-            set => selectedxAchse = value;
+            set
+            {
+                if (selectedxAchse != value)
+                {
+                    selectedxAchse = value;
+                    OnPropertyChanged("XAchseCollection");
+                    OnPropertyChanged("YAchseCollection");
+                }
+            }
         }
-        private string? selectedyAchse = null;
-        public string? SelectedyAchse
+        public IEnumerable<string> YAchseCollection
+        {
+            get
+            {
+                return SauCollection.Where(x => x != SelectedxAchse);
+            }
+        }
+        private string selectedyAchse;
+        public string SelectedyAchse
         {
             get => selectedyAchse;
-            set => selectedyAchse = value;
+            set
+            {
+                if (selectedyAchse != value)
+                {
+                    selectedyAchse = value;
+                    OnPropertyChanged("XAchseCollection");
+                    OnPropertyChanged("YAchseCollection");
+
+                }
+            }
         }
-        private string? selectedDiagramm = null;
-        public string? SelectedDiagramm
-        {
-            get => selectedDiagramm;
-            set => selectedDiagramm = value;
-        }
-        public List<string> AnzeigeCollection { get; set; } = new List<string> { "Absolut", "Relativ" };
-        public List<string> DiagrammCollection { get; set; } = new List<string> { "Basic Line", "Zooming and panning", "Line smoothness" };
-        public List<string> SauCollection { get; set; } = new List<string>();
         public SaulendiaConfigView() 
         {
             FillUi();
@@ -115,50 +138,68 @@ namespace DiaCreator
         {
             foreach (string item in App.CurrentReader.GetValueHead())
             {
-                SauCollection.Add(item);
+                saucollection.Add(item);
             }
         }
         public override Writer GenerateWriter()
         {
-            return new SaulendiaWriter();
+            return new SaulendiaWriter()
+            {
+                ValuexAchse = App.CurrentReader.GetDataIndex(SelectedxAchse),
+                ValueyAchse = App.CurrentReader.GetDataIndex(SelectedyAchse),
+            };
         }
     }
 
     public class LiniendiaConfigView : ConfigViewModell 
     {
-        private string? selectedKategorie = null;
-        public string? SelectedKategorie
+
+        private List<string> liniencollection = new List<string>();
+        public IEnumerable<string> LinienCollection { get => liniencollection; }
+        public IEnumerable<string> XAchseCollection
         {
-            get => selectedKategorie;
-            set => selectedKategorie = value;
+            get
+            {
+                return LinienCollection.Where(x => x != SelectedyAchse);
+            }
         }
-        private string? selectedxAchse = null;
-        public string? SelectedxAchse
+        private string selectedxAchse;
+        public string SelectedxAchse
         {
             get => selectedxAchse;
-            set => selectedxAchse = value;
+            set
+            {
+                if (selectedxAchse != value)
+                {
+                    selectedxAchse = value;
+                    OnPropertyChanged("XAchseCollection");
+                    OnPropertyChanged("YAchseCollection");
+                }
+            }
         }
-        private string? selectedyAchse = null;
-        public string? SelectedyAchse
+        public IEnumerable<string> YAchseCollection
+        {
+            get
+            {
+                return LinienCollection.Where(x => x != SelectedxAchse);
+            }
+        }
+        private string selectedyAchse;
+        public string SelectedyAchse
         {
             get => selectedyAchse;
-            set => selectedyAchse = value;
+            set
+            {
+                if (selectedyAchse != value)
+                {
+                    selectedyAchse = value;
+                    OnPropertyChanged("XAchseCollection");
+                    OnPropertyChanged("YAchseCollection");
+
+                }
+            }
         }
-        private string? selectedAnzeige = null;
-        public string? SelectedAnzeige
-        {
-            get => selectedAnzeige;
-            set => selectedAnzeige = value;
-        }
-        private string? selectedDiagramm = null;
-        public string? SelectedDiagramm
-        {
-            get => selectedDiagramm;
-            set => selectedDiagramm = value;
-        }
-        public List<string> AnzeigeCollection { get; set; } = new List<string> { "Absolut", "Relativ" };
-        public List<string> DiagrammCollection { get; set; } = new List<string> { "Basic bars", "Column width", "Dynamic visibility" };
-        public List<string> LinienCollection { get; set; } = new List<string>();
+
         public LiniendiaConfigView() 
         {
             FillUi();
@@ -168,12 +209,16 @@ namespace DiaCreator
         {
             foreach (string item in App.CurrentReader.GetValueHead())
             {
-                LinienCollection.Add(item);
+                liniencollection.Add(item);
             }
         }
         public override Writer GenerateWriter()
         {
-            return new LiniendiaWriter();
+            return new LiniendiaWriter()
+            {
+                ValuexAchse = App.CurrentReader.GetDataIndex(SelectedxAchse),
+                ValueyAchse = App.CurrentReader.GetDataIndex(SelectedyAchse),
+            };
         }
     }
 }

@@ -21,6 +21,8 @@ namespace DiaCreator
     public class KreisdiaWriter : Writer
     {
         public int UsedValue {  get; set; }
+        public string Anzeige {  get; set; }
+        public int Pushout { get; set; }
         public KreisdiaWriter() 
         {
             UsedValue = 1;
@@ -38,7 +40,7 @@ namespace DiaCreator
         private ISeries GenerateSeriesObj(DSet set)
         {
             double[] totallist = [];
-            var Pie = new PieSeries<double> { Values = new[] { TotalValueofDSet(set) }, Name=set.Name };
+            var Pie = new PieSeries<double> { Values = new[] { TotalValueofDSet(set) }, Name=set.Name, Pushout=Pushout };
             return Pie;
         }
         public List<ISeries> GenerateSeriesList(List<DSet> sets)
@@ -56,12 +58,16 @@ namespace DiaCreator
     public class SaulendiaWriter : Writer 
     {
         private ObservableCollection<ObservablePoint> _observablePoints;
+
+        public int ValuexAchse { get; set; }
+        public int ValueyAchse { get; set; }
+
         private ISeries GenerateSeriesObj(DSet set)
         {
             _observablePoints = new ObservableCollection<ObservablePoint>();
             foreach (var d in set.Data)
             {
-                _observablePoints.Add(new ObservablePoint(Double.Parse(d[0]), Double.Parse(d[1])));
+                _observablePoints.Add(new ObservablePoint(Double.Parse(d[ValuexAchse]), Double.Parse(d[ValueyAchse])));
             }
             var obj = new ColumnSeries<ObservablePoint>() { Values = _observablePoints, Name = set.Name };
             return obj;
@@ -80,6 +86,9 @@ namespace DiaCreator
 
     public class LiniendiaWriter : Writer
     {
+        public int ValuexAchse { get; set; }
+        public int ValueyAchse { get; set; }
+
         private ObservableCollection<ObservablePoint> _observablePoints;
         private List<string[]> SortDSet(DSet set) 
         {
@@ -93,7 +102,7 @@ namespace DiaCreator
             _observablePoints = new ObservableCollection<ObservablePoint>();
             foreach (var d in data) 
             {
-                _observablePoints.Add(new ObservablePoint(Double.Parse(d[0]), Double.Parse(d[1])));
+                _observablePoints.Add(new ObservablePoint(Double.Parse(d[ValuexAchse]), Double.Parse(d[ValueyAchse])));
             }
             var obj = new LineSeries<ObservablePoint>() { Values=_observablePoints, Name=set.Name };
             return obj;

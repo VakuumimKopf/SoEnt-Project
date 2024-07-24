@@ -26,6 +26,7 @@ namespace DiaCreator
         public ObservableCollection<ISeries> Series { get; set; } = new ObservableCollection<ISeries>();
         private Window? window { get; set; }
         private Writer? writer;
+        public Writer? Writer { get; set; }
         
         private static readonly Lazy<CartDiaBuilder> lazy = new Lazy<CartDiaBuilder>(GetInstance);
         
@@ -56,7 +57,7 @@ namespace DiaCreator
                 window.DataContext = this;
                 window.Show();
                
-                writer = App.CurrentBuilder.CreateWriter(_type);
+                writer = config.GenerateWriter();
 
                 var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllExept(config.hiddenDSets.ToArray<int>()));
                 foreach (var obj in obj_list)
@@ -101,7 +102,7 @@ namespace DiaCreator
                 window.DataContext = this;
                 window.Show();
 
-                writer = App.CurrentBuilder.CreateWriter("Kreisdiagramm");
+                writer = config.GenerateWriter();
                 var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllExept(config.hiddenDSets.ToArray<int>()));
                 foreach (var obj in obj_list)
                 {
