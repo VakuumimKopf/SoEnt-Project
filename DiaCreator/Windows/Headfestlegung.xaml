@@ -15,10 +15,10 @@
             <TextBlock Text="Legen Sie die Datenpunkte in ihrer Datei fest" 
                        HorizontalAlignment="Center"
                        Margin="0,20"/>
-            <Label Content="Zeile nach der gruppiert werden soll"
+            <Label Content="Spalte nach der die Daten gruppiert werden sollen"
                    Margin="5,10"/>
             <ComboBox Margin="50,5" ItemsSource="{Binding ComboboxItemsKat}" SelectedItem="{Binding SelectedItemKat}"/>
-            <Label Content="Datenzeilen dessen Daten verarbeitet werden sollen"
+            <Label Content="Datenspalte deren Daten verarbeitet werden sollen"
                    Margin="5,10"/>
             <ComboBox Margin="50,5" ItemsSource="{Binding ComboboxItems1}" SelectedItem="{Binding SelectedItem1}" />
             <ComboBox Margin="50,5" ItemsSource="{Binding ComboboxItems2}" SelectedItem="{Binding SelectedItem2}"/>

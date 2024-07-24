@@ -20,6 +20,8 @@ namespace DiaCreator
         public abstract void FillUi();
         public abstract Writer GenerateWriter();
 
+        public abstract void ResetSettings();
+
         public void DSetEvent(object sender, int id) 
         {
             if(hiddenDSets.Contains(id)) 
@@ -34,28 +36,17 @@ namespace DiaCreator
 
     public class KreisdiaConfigView : ConfigViewModell
     {
-        private string? selectedValue = null;
+        private string? selectedValue;
         public string? SelectedValue
         {
             get => selectedValue;
-            set => selectedValue = value;
+            set
+            {
+                selectedValue = value;
+                OnPropertyChanged("SelectedValue");
+            }
         }
-
-        private string? selectedAnzeige = null;
-        public string? SelectedAnzeige
-        {
-            get => selectedAnzeige;
-            set => selectedAnzeige = value;
-        }
-        private string? selectedDiagramm = null;
-        public string? SelectedDiagramm
-        {
-            get => selectedDiagramm;
-            set => selectedDiagramm = value;
-        }
-        
         public List<string> KreisCollection { get; set; } = new List<string>();
-        public List<string> AnzeigeCollection { get; set; } = new List<string> {"Absolut","Relativ"};
         public KreisdiaConfigView() 
         {
             FillUi();   
@@ -73,10 +64,11 @@ namespace DiaCreator
             return new KreisdiaWriter()
             {
                 UsedValue = App.CurrentReader.GetDataIndex(selectedValue),
-                Anzeige = selectedAnzeige,
-                Pushout = App.CurrentReader.GetHeadElementIndex(selectedDiagramm)
-
             };
+        }
+        public override void ResetSettings()
+        {
+            SelectedValue = null;
         }
 
 
@@ -93,8 +85,8 @@ namespace DiaCreator
                 return SauCollection.Where(x => x != SelectedyAchse);
             }
         }
-        private string selectedxAchse;
-        public string SelectedxAchse
+        private string? selectedxAchse;
+        public string? SelectedxAchse
         {
             get => selectedxAchse;
             set
@@ -114,8 +106,8 @@ namespace DiaCreator
                 return SauCollection.Where(x => x != SelectedxAchse);
             }
         }
-        private string selectedyAchse;
-        public string SelectedyAchse
+        private string? selectedyAchse;
+        public string? SelectedyAchse
         {
             get => selectedyAchse;
             set
@@ -132,6 +124,11 @@ namespace DiaCreator
         public SaulendiaConfigView() 
         {
             FillUi();
+        }
+        public override void ResetSettings()
+        {
+            this.SelectedxAchse = null;
+            this.SelectedyAchse = null;
         }
 
         public override void FillUi()
@@ -163,8 +160,8 @@ namespace DiaCreator
                 return LinienCollection.Where(x => x != SelectedyAchse);
             }
         }
-        private string selectedxAchse;
-        public string SelectedxAchse
+        private string? selectedxAchse;
+        public string? SelectedxAchse
         {
             get => selectedxAchse;
             set
@@ -184,8 +181,8 @@ namespace DiaCreator
                 return LinienCollection.Where(x => x != SelectedxAchse);
             }
         }
-        private string selectedyAchse;
-        public string SelectedyAchse
+        private string? selectedyAchse;
+        public string? SelectedyAchse
         {
             get => selectedyAchse;
             set
@@ -204,7 +201,11 @@ namespace DiaCreator
         {
             FillUi();
         }
-
+        public override void ResetSettings()
+        {
+            this.SelectedxAchse = null;
+            this.SelectedyAchse = null;
+        }
         public override void FillUi()
         {
             foreach (string item in App.CurrentReader.GetValueHead())

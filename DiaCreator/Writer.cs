@@ -21,12 +21,6 @@ namespace DiaCreator
     public class KreisdiaWriter : Writer
     {
         public int UsedValue {  get; set; }
-        public string Anzeige {  get; set; }
-        public int Pushout { get; set; }
-        public KreisdiaWriter() 
-        {
-            UsedValue = 1;
-        }
         
         private double TotalValueofDSet(DSet set) 
         {
@@ -40,7 +34,7 @@ namespace DiaCreator
         private ISeries GenerateSeriesObj(DSet set)
         {
             double[] totallist = [];
-            var Pie = new PieSeries<double> { Values = new[] { TotalValueofDSet(set) }, Name=set.Name, Pushout=Pushout };
+            var Pie = new PieSeries<double> { Values = new[] { TotalValueofDSet(set) }, Name=set.Name};
             return Pie;
         }
         public List<ISeries> GenerateSeriesList(List<DSet> sets)
@@ -92,7 +86,7 @@ namespace DiaCreator
         private ObservableCollection<ObservablePoint> _observablePoints;
         private List<string[]> SortDSet(DSet set) 
         {
-            var data = set.Data.OrderBy(r => r[0])
+            var data = set.Data.OrderBy(r => r[ValuexAchse])
                 .ToList();
             return data;
         }

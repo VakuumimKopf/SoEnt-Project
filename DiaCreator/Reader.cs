@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.DirectoryServices.ActiveDirectory;
 
 
 namespace DiaCreator
@@ -58,31 +59,60 @@ namespace DiaCreator
 
         private void DSetAdd(List<DSet> DSets, string[] Data)//wenn ein DSet noch nicht existiert wird ein passendes neues erzeugt
         {                                                                  // und werte werden hinzugefügt
-            if (DSetExist(DSets, Data[katindex]) == false)
+            if(katindex == -1) 
             {
-                DSets.Add(new DSet(Data[katindex]));
+                if (DSetExist(DSets, "Alle") == false) 
+                {
+                    DSets.Add(new DSet("Alle"));
+                }
+                this.DSetAddValues(DSets, Data);
+            } else 
+            {
+                if (DSetExist(DSets, Data[katindex]) == false)
+                {
+                    DSets.Add(new DSet(Data[katindex]));
+                }
+                DSetAddValues(DSets, Data);
             }
-            DSetAddValues(DSets, Data);
         }
 
         private void DSetAddValues(List<DSet> DSets, string[] Data) //fügt die entsprechenden Einträge dem zugehörigem DSet hinzu
         {                  
-            foreach (DSet T in DSets)
+            if(katindex == -1) 
             {
-                if (T.Name == Data[katindex])
+                DSet dset = DSets.Find(DSet => DSet.Name == "Alle");
+                switch (this.valueindex.Length)
                 {
-                    switch(this.valueindex.Length) 
+                    case 1:
+                        dset.AddData(Data[valueindex[0]]);
+                        break;
+                    case 2:
+                        dset.AddData(Data[valueindex[0]], Data[valueindex[1]]);
+                        break;
+                    case 3:
+                        dset.AddData(Data[valueindex[0]], Data[valueindex[1]], Data[valueindex[2]]);
+                        break;
+                    default: throw new Exception("Fehler bei der Datenübergabe an DSet: " + dset.Name);
+                }
+            } else 
+            {
+                foreach (DSet T in DSets)
+                {
+                    if (T.Name == Data[katindex])
                     {
-                        case 1:
-                            T.AddData(Data[valueindex[0]]);
-                            break;
-                        case 2:
-                            T.AddData(Data[valueindex[0]], Data[valueindex[1]]);
-                            break;
-                        case 3:
-                            T.AddData(Data[valueindex[0]], Data[valueindex[1]], Data[valueindex[2]]);
-                            break;
-                        default: throw new Exception("Fehler bei der Datenübergabe an DSet: " + T.Name);
+                        switch (this.valueindex.Length)
+                        {
+                            case 1:
+                                T.AddData(Data[valueindex[0]]);
+                                break;
+                            case 2:
+                                T.AddData(Data[valueindex[0]], Data[valueindex[1]]);
+                                break;
+                            case 3:
+                                T.AddData(Data[valueindex[0]], Data[valueindex[1]], Data[valueindex[2]]);
+                                break;
+                            default: throw new Exception("Fehler bei der Datenübergabe an DSet: " + T.Name);
+                        }
                     }
                 }
             }
@@ -96,7 +126,8 @@ namespace DiaCreator
             {
                 if (item.Value == 2) { kat = item.Key; break; }
             }
-            return this.GetHeadElementIndex(kat);
+            if(kat == "Nicht Gruppieren") return -1;
+            else return this.GetHeadElementIndex(kat);
         }
 
         private List<int> GetValueIndex()
@@ -120,6 +151,7 @@ namespace DiaCreator
         public int GetHeadElementIndex(string key)
         {
             var headelements = this.GetTableHead();
+            Debug.WriteLine(key);
             
             for (int i = 0; i < headelements.Length; i++)
             {

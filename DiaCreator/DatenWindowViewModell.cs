@@ -43,6 +43,7 @@ namespace DiaCreator
         }
 
         public ICommand Darstellen {  get; set; }
+        public ICommand Reset {  get; set; }
 
         public DatenWindowViewModell(string Diagrammtyp) 
         {
@@ -54,12 +55,18 @@ namespace DiaCreator
             DSetItems = new ObservableCollection<DSetViewModell>(DSetViewModells);
 
             Darstellen = new RelayCommand(parameter => DiaDarstellen());
+            Reset = new RelayCommand(parameter => ResetSettings());
         }
 
         private void DiaDarstellen() 
         {
             var diabuilder = App.CurrentBuilder.CreateDiaBuilder(diagrammtyp);
             diabuilder.Call(config);
+        }
+
+        private void ResetSettings()
+        {
+            config.ResetSettings();
         }
     }
 }

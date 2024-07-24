@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -115,7 +116,9 @@ namespace DiaCreator
         {
             get
             {
-                return ComboboxItems.Where(x => x != SelectedItem1 && x != SelectedItem2 && x != SelectedItem3);
+                List<string> list = (ComboboxItems.Where(x => x != SelectedItem1 && x != SelectedItem2 && x != SelectedItem3)).ToList<string>();
+                list.Add("Nicht Gruppieren");
+                return list;
             }
         }
         public event EventHandler OnRequestClose;
@@ -132,30 +135,36 @@ namespace DiaCreator
         }
         public void Bestatigen() 
         {
-            var list = new List<KeyValuePair<string, int>>();
-            if (_selectedItem1 != null)
+            if(_selectedItemKat == null | ((_selectedItem1 == null) & (_selectedItem2 == null) & (_selectedItem3 == null))) 
             {
-                list.Add(new KeyValuePair<string, int>(_selectedItem1, 1));
-            }
-            if (_selectedItem2 != null)
+                MessageBox.Show("Sie müssen eine Spalte zur Gruppierung und mindestens eine Spalte zur Datenerfassung festlegen");
+            } else 
             {
-                list.Add(new KeyValuePair<string, int>(_selectedItem2, 1));
+                var list = new List<KeyValuePair<string, int>>();
+                if (_selectedItem1 != null)
+                {
+                    list.Add(new KeyValuePair<string, int>(_selectedItem1, 1));
+                }
+                if (_selectedItem2 != null)
+                {
+                    list.Add(new KeyValuePair<string, int>(_selectedItem2, 1));
+                }
+                if (_selectedItem3 != null)
+                {
+                    list.Add(new KeyValuePair<string, int>(_selectedItem3, 1));
+                }
+                list.Add(new KeyValuePair<string, int>(_selectedItemKat, 2));
+
+
+
+                App.CurrentReader.SetBalancedTabelHead(list);
+                App.CurrentDHolder.AddDataList(App.CurrentReader.GetFileData());
+                var DatenWindow = new DatenWindow();
+                DatenWindow.DataContext = new DatenWindowViewModell(diagrammtyp);
+                DatenWindow.Show();
+
+                OnRequestClose(this, new EventArgs());
             }
-            if (_selectedItem3 != null) 
-            {
-                list.Add(new KeyValuePair<string, int>(_selectedItem3, 1));                
-            }
-            list.Add(new KeyValuePair<string, int>(_selectedItemKat, 2));
-
-            
-
-            App.CurrentReader.SetBalancedTabelHead(list);
-            App.CurrentDHolder.AddDataList(App.CurrentReader.GetFileData());
-            var DatenWindow = new DatenWindow();
-            DatenWindow.DataContext = new DatenWindowViewModell(diagrammtyp);
-            DatenWindow.Show();
-
-            OnRequestClose(this, new EventArgs());
         }
     }
 }

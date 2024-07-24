@@ -28,7 +28,7 @@ namespace DiaCreator
 
         public string DateiPfad
         {
-            get => filepath ??= "Dateipfad";
+            get => filepath ?? "Dateipfad...";
             set
             {
                 filepath = value;
@@ -65,19 +65,25 @@ namespace DiaCreator
         }
         private void ErstelleNeuesProjekt()
         {
-            // Ein Reader wird erzeugt passend zum Dateityp und in die golbale Property CurrentReader geschrieben, ihm wird der Pfad zur geöffneten Datei übergeben
-            if (filepath == null) { throw new Exception("Keine Datei übergeben"); }
-            App.CurrentReader = App.CurrentBuilder.CreateReader("csv", filepath);
-            // Der Reader ließt die ihm übergebene Datei aus und speichert den gelesenen Ihnhalt in den globalen DHolder
-
             // Das Fenster DataWindow wird erzeugt und das Startfenster geschlossen
-            if (diagrammtyp == null) { throw new Exception("Kein Diagrammtyp übergeben"); }
-            var Headfestlegung = new Headfestlegung();
-            var vm = new HeadfestlegungViewModell(diagrammtyp);
-            Headfestlegung.DataContext = vm;
-            vm.OnRequestClose += (sender, e) => Headfestlegung.Close();
-            Headfestlegung.Show();
-            OnRequestClose(this, new EventArgs());
+            if (diagrammtyp == null | this.filepath == null) 
+            {
+                MessageBox.Show("Es wurde kein Diagrammtyp oder keine Datei ausgewählt");
+            } else
+            {
+                // Ein Reader wird erzeugt passend zum Dateityp und in die golbale Property CurrentReader geschrieben, ihm wird der Pfad zur geöffneten Datei übergeben
+                App.CurrentReader = App.CurrentBuilder.CreateReader("csv", filepath);
+
+                // Das Fenster Headfestlegung wird erzeugt und das Startfenster geschlossen
+                var Headfestlegung = new Headfestlegung();
+                var vm = new HeadfestlegungViewModell(diagrammtyp);
+                Headfestlegung.DataContext = vm;
+                vm.OnRequestClose += (sender, e) => Headfestlegung.Close();
+
+                Headfestlegung.Show();
+
+                OnRequestClose(this, new EventArgs());
+            }
         }
     }
 }
