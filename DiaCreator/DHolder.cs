@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,18 @@ namespace DiaCreator
         public List<DSet> GetAllData() 
         {
             return data;
+        }
+        public List<DSet> GetAllExept(int[] ids)
+        {
+            var liste = new List<DSet>();
+            foreach(var d in data)
+            {
+                if(!ids.Contains(d.Id))
+                {
+                    liste.Add(d);
+                }
+            }
+            return liste;
         }
     }
 }

@@ -1,0 +1,29 @@
+﻿<Window x:Class="DiaCreator.Headfestlegung"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiaCreator"
+        mc:Ignorable="d"
+        Title="Headfestlegung" Height="450" Width="350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Legen Sie die Datenpunkte in ihrer Datei fest" 
+                       HorizontalAlignment="Center"
+                       Margin="0,20"/>
+            <Label Content="Spalte nach der die Daten gruppiert werden sollen"
+                   Margin="5,10"/>
+            <ComboBox Margin="50,5" ItemsSource="{Binding ComboboxItemsKat}" SelectedItem="{Binding SelectedItemKat}"/>
+            <Label Content="Datenspalte deren Daten verarbeitet werden sollen"
+                   Margin="5,10"/>
+            <ComboBox Margin="50,5" ItemsSource="{Binding ComboboxItems1}" SelectedItem="{Binding SelectedItem1}" />
+            <ComboBox Margin="50,5" ItemsSource="{Binding ComboboxItems2}" SelectedItem="{Binding SelectedItem2}"/>
+            <ComboBox Margin="50,5" ItemsSource="{Binding ComboboxItems3}" SelectedItem="{Binding SelectedItem3}"/>
+        </StackPanel>
+        <Button Content="Bestätigen" Grid.Row="1" Margin="100,20" Command="{Binding ClickBestatigen}"/>
+    </Grid>
+</Window>

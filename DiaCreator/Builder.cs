@@ -39,7 +39,7 @@ namespace DiaCreator
         {
             switch (type)
             {
-                case "csv": return new CSVReader(path, 0);
+                case "csv": return new CSVReader(path);
                 default: throw new Exception("Übergebener Reader Type existiert nicht");
             }
         }

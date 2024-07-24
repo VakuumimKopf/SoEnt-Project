@@ -18,7 +18,7 @@ namespace DiaCreator
     
     public interface DiaBuilder 
     {
-        public void Call();
+        public void Call(ConfigViewModell config);
     }
     public class CartDiaBuilder : DiaBuilder
     {
@@ -26,6 +26,7 @@ namespace DiaCreator
         public ObservableCollection<ISeries> Series { get; set; } = new ObservableCollection<ISeries>();
         private Window? window { get; set; }
         private Writer? writer;
+        public Writer? Writer { get; set; }
         
         private static readonly Lazy<CartDiaBuilder> lazy = new Lazy<CartDiaBuilder>(GetInstance);
         
@@ -42,7 +43,7 @@ namespace DiaCreator
         {
         }
 
-        public void Call()
+        public void Call(ConfigViewModell config)
         {
             if (Application.Current.Windows.OfType<DiagrammWindow>().Any() == false)
             {
@@ -55,9 +56,10 @@ namespace DiaCreator
                 window = new DiagrammWindow();
                 window.DataContext = this;
                 window.Show();
+               
+                writer = config.GenerateWriter();
 
-                writer = App.CurrentBuilder.CreateWriter(_type);
-                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
+                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllExept(config.hiddenDSets.ToArray<int>()));
                 foreach (var obj in obj_list)
                 {
                     Series.Add(obj);
@@ -86,7 +88,7 @@ namespace DiaCreator
         private PieDiaBuilder()
         {
         }  
-        public void Call()
+        public void Call(ConfigViewModell config)
         {
             if (Application.Current.Windows.OfType<DiagrammWindow>().Any() == false)
             {
@@ -100,8 +102,8 @@ namespace DiaCreator
                 window.DataContext = this;
                 window.Show();
 
-                writer = App.CurrentBuilder.CreateWriter("Kreisdiagramm");
-                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllData());
+                writer = config.GenerateWriter();
+                var obj_list = writer.GenerateSeriesList(App.CurrentDHolder.GetAllExept(config.hiddenDSets.ToArray<int>()));
                 foreach (var obj in obj_list)
                 {
                     Series.Add(obj);

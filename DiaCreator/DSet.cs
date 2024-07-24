@@ -1,9 +1,12 @@
-﻿using System;
+﻿using DiaCreator.BaseClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace DiaCreator
@@ -36,16 +39,52 @@ namespace DiaCreator
             Id = InstanceId;
             InstanceId = InstanceId + 1;
         }
+        public void AddData(string value1)
+        {
+            data.Add([value1]);
+        }
 
         public void AddData(string value1, string value2)
         {
             data.Add([value1, value2]);
         }
-
+        public void AddData(string value1, string value2, string value3)
+        {
+            data.Add([value1, value2, value3]);
+        }
     }
 
     public class DSetViewModell : BaseViewModell
     {
+        private bool visible = true;
+
+        public string Visibility 
+        {
+            get
+            {
+                if (visible) return "Hide";
+                else return "Show";
+            }
+        }
+        public string FontStyle 
+        {
+            get
+            {
+                if (visible) return "Normal";
+                else return "Italic";
+            }
+        } 
+        public bool Visible 
+        {
+            get => visible;
+            set
+            {
+                visible = value;
+                OnPropertyChanged("Visibility");
+                OnPropertyChanged("FontStyle");
+            }
+        }
+
         private string name;
         public string Name
         {
@@ -63,11 +102,20 @@ namespace DiaCreator
             get => data;
         }
 
-        public DSetViewModell(string name_n, int id_n, List<string[]> data_n) 
+        public event EventHandler<int> DataChanged;
+        public ICommand ClickHide {  get; set; }
+        public DSetViewModell(string name_n, int id_n, List<string[]> data_n, ConfigViewModell config) 
         {
+            ClickHide = new RelayCommand(parameter => ChangeVisibility());
             this.name = name_n;
             this.id = id_n;
             this.data = data_n;
+            DataChanged += config.DSetEvent;
+        }
+        public void ChangeVisibility()
+        {
+            Visible = !Visible;
+            DataChanged(this, this.Id);
         }
     }
 }
