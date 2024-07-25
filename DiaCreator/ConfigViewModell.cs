@@ -21,6 +21,7 @@ namespace DiaCreator
         public abstract Writer GenerateWriter();
 
         public abstract void ResetSettings();
+        public abstract bool CheckIfAllSet();
 
         public void DSetEvent(object sender, int id) 
         {
@@ -69,6 +70,10 @@ namespace DiaCreator
         public override void ResetSettings()
         {
             SelectedValue = null;
+        }
+        public override bool CheckIfAllSet()
+        {
+            return selectedValue != null;
         }
 
 
@@ -147,6 +152,10 @@ namespace DiaCreator
                 ValueyAchse = App.CurrentReader.GetDataIndex(SelectedyAchse),
             };
         }
+        public override bool CheckIfAllSet()
+        {
+            return (selectedxAchse != null & selectedyAchse != null);
+        }
     }
 
     public class LiniendiaConfigView : ConfigViewModell 
@@ -222,6 +231,10 @@ namespace DiaCreator
                 ValuexAchse = App.CurrentReader.GetDataIndex(SelectedxAchse),
                 ValueyAchse = App.CurrentReader.GetDataIndex(SelectedyAchse),
             };
+        }
+        public override bool CheckIfAllSet()
+        {
+            return (selectedxAchse != null & selectedyAchse != null);
         }
     }
 }

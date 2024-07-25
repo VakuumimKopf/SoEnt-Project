@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using DiaCreator.BaseClasses;
 
@@ -60,8 +61,16 @@ namespace DiaCreator
 
         private void DiaDarstellen() 
         {
-            var diabuilder = App.CurrentBuilder.CreateDiaBuilder(diagrammtyp);
-            diabuilder.Call(config);
+            if(config.CheckIfAllSet()) 
+            {
+                var diabuilder = App.CurrentBuilder.CreateDiaBuilder(diagrammtyp);
+                diabuilder.Call(config);
+            } else
+            {
+                MessageBox.Show("Alle Einstellungsmöglichkeiten müssen einen Wert haben");
+            }
+            
+
         }
 
         private void ResetSettings()
