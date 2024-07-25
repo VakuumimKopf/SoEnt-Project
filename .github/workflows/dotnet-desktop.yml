@@ -17,15 +17,16 @@ jobs:
             - run: dotnet restore DiaCreator/DiaCreator.csproj
             - run: dotnet build DiaCreator/DiaCreator.csproj -c Release --no-restore
             - run: dotnet publish DiaCreator/DiaCreator.csproj -c Release --self-contained -p:PublishSingleFile=true
+  
             - uses: actions/create-release@v1
-                id: create_release
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                with: 
-                    tag_name: ${{ github.ref }}
-                    release_name: ${{ github.ref }}
+              id: create_release
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with: 
+                tag_name: ${{ github.ref }}
+                release_name: ${{ github.ref }}
             - uses: csexton/release-asset-action@v2
-                with:
-                    github-token: ${{ secrets.GITHUB_TOKEN }}
-                    pattern: DiaCreator/bin/Release/net8.0-windows/win-x64/publish/*.exe
-                    release-url: ${{ steps.create_release.outputs.upload_url }}
+              with:
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                pattern: DiaCreator/bin/Release/net8.0-windows/win-x64/publish/*.exe
+                release-url: ${{ steps.create_release.outputs.upload_url }}
