@@ -150,9 +150,7 @@ namespace DiaCreator
 
         public int GetHeadElementIndex(string key)
         {
-            var headelements = this.GetTableHead();
-            Debug.WriteLine(key);
-            
+            var headelements = this.GetTableHead();            
             for (int i = 0; i < headelements.Length; i++)
             {
                 if (headelements[i] == key) { return i; }

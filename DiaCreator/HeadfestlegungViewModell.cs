@@ -135,10 +135,15 @@ namespace DiaCreator
         }
         public void Bestatigen() 
         {
-            if(_selectedItemKat == null | ((_selectedItem1 == null) & (_selectedItem2 == null) & (_selectedItem3 == null))) 
+            if (_selectedItemKat == null | ((_selectedItem1 == null) & (_selectedItem2 == null) & (_selectedItem3 == null))) 
             {
                 MessageBox.Show("Sie müssen eine Spalte zur Gruppierung und mindestens eine Spalte zur Datenerfassung festlegen");
-            } else 
+
+            } else if ((diagrammtyp=="Säulendiagramm" | diagrammtyp =="Liniendiagramm") & (((_selectedItem1 != null) & (_selectedItem2 == null) & (_selectedItem3 == null)) | ((_selectedItem1 == null) & (_selectedItem2 != null) & (_selectedItem3 == null)) | ((_selectedItem1 == null) & (_selectedItem2 == null) & (_selectedItem3 != null))) )
+            {
+                MessageBox.Show("Sie müssen für Säulen- und Liniendiagramme mindestens 2 Datenspalten festlegen");
+            }
+            else 
             {
                 var list = new List<KeyValuePair<string, int>>();
                 if (_selectedItem1 != null)

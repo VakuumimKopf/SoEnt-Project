@@ -96,6 +96,7 @@ namespace DiaCreator
                     selectedxAchse = value;
                     OnPropertyChanged("XAchseCollection");
                     OnPropertyChanged("YAchseCollection");
+                    OnPropertyChanged("SelectedxAchse");
                 }
             }
         }
@@ -117,7 +118,7 @@ namespace DiaCreator
                     selectedyAchse = value;
                     OnPropertyChanged("XAchseCollection");
                     OnPropertyChanged("YAchseCollection");
-
+                    OnPropertyChanged("SelectedyAchse");
                 }
             }
         }
@@ -171,6 +172,7 @@ namespace DiaCreator
                     selectedxAchse = value;
                     OnPropertyChanged("XAchseCollection");
                     OnPropertyChanged("YAchseCollection");
+                    OnPropertyChanged("SelectedxAchse");
                 }
             }
         }
@@ -192,7 +194,7 @@ namespace DiaCreator
                     selectedyAchse = value;
                     OnPropertyChanged("XAchseCollection");
                     OnPropertyChanged("YAchseCollection");
-
+                    OnPropertyChanged("SelectedyAchse");
                 }
             }
         }
