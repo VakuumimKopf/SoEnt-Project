@@ -1,0 +1,19 @@
+name: "Deploy DiaCreator"
+
+on:
+    push:
+        tags:
+            - "DiaCreator/v*"
+jobs:
+    deploy:
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v2
+  
+            - uses: actions/setup-dotnet@v1
+              with:
+                dotnet-version: 8.0.x
+
+            - run: dotnet restore DiaCreator/DiaCreator.csproj
+            - run: dotnet build DiaCreator/DiaCreator.csproj -c Release --no-restore
+            - run: dotnet publish DiaCreator/DiaCreator.csproj -c Release --self-contained -p:PublishSingleFile=true
